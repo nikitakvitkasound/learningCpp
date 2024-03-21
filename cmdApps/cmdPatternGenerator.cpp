@@ -112,5 +112,7 @@ int main(){
     GeneratePyramid(kPyramid, kBrick, kEmpty);
     std::cout << "\n\n";
 
+
+    std::cin.get();
     return 0;
 }
