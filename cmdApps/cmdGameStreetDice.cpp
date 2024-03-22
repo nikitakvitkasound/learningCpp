@@ -1,68 +1,112 @@
+
+// TODO - Point Number Part
+// TODO - unsigned int varaibles (and is it even necessary?)
+// TODO - Cosmetics (Names Bets Money)
+// TODO - Input Validation
+// TODO - Fucntion inputs (optimize)
+
 #include <iostream>
 #include <ctime>
 #include <array>
 #include <algorithm>
 
-
-// TODO - Choose Shooter
-// TODO - Money Bank
-// TODO - Betting System (Withdraw and Cashin)
-// TODO - Players Turn (Part of Choose Shooter)
-// TODO - AI Turn (Part of Choose Shooter)
-// TODO - Throws: Refractor existing code
-// TODO - Refactor all code (put in function if it's neccessary) but maintain streamline game loop code
-// TODO - add visual <...> and delay output to slow the gameplay flow
+const std::array<int, 2> kWinNumbers = {7, 11};
+const std::array<int, 3> kLoseNumbers = {2, 3, 12}; 
 
 
-static int Throw(){
-    int d1 = (rand() % 6) + 1;
-    int d2 = (rand() % 6) + 1;
-    int r = d1 + d2;
+static int DiceThrow(){
+    int d_01 = (rand() % 6) + 1;
+    int d_02 = (rand() % 6) + 1;
 
-    std::cout << '|' << d1 << '|' << " " << '|' << d2 << '|' << " ::: roll is " << r << '\n';
+    //std::cout << '|' << d_01 << '|' << ' ' << '|' << d_02 << '|' << ' ';
+    return d_01 + d_02;
 
-    return r;
 }
 
-int main(){
-    srand(static_cast<unsigned int>(time(0)));
+static bool IsShooter(){
+    int s_01 = DiceThrow();
+    int s_02 = DiceThrow();
+    bool is_shooter;
 
-    // Game Rules
-    std::array<int, 2> throws_win = {7, 11};
-    std::array<int, 3> throws_lose = {2, 3, 12};
-    const int kPointNumberLose = 7;
-    int point_number_win;
-    bool throwing_point = false;
-
-    int roll = Throw();
-    if (std::find(throws_win.begin(), throws_win.end(), roll) != throws_win.end()){
-        std::cout << "win!";
-    }
-    else if (std::find(throws_lose.begin(), throws_lose.end(), roll) != throws_lose.end()){
-        std::cout << "lose!";
-    }
-    else{
-        std::cout << "That's a point!! And your point is " << roll << '\n'; 
-        std::cout << "Roll again, but don't roll " << kPointNumberLose << " you'll lose! You must roll the point to win!\n";
-        point_number_win = roll;
-        throwing_point = true;
-        
-        while (throwing_point)
-        {
-            roll = Throw();
-            
-            if (roll == point_number_win){
-                std::cout << "You won!!!\n";
-                throwing_point = false;
-            }
-            else if (roll == kPointNumberLose){
-                std::cout << "You lost!!!\n";
-                throwing_point = false;
-            }
+    while(true){
+        if (s_01 == s_02){
+            continue;
+        }
+        else if (s_01 > s_02){
+            is_shooter = true;
+            break;
+        }
+        else{
+            is_shooter = false;
+            break;
         }
     }
-
     
-    std::cin.get();
+    return is_shooter;
+}
+
+static int DiceThrowResult(int roll, int money, int bet){
+    if (std::find(kWinNumbers.begin(), kWinNumbers.end(), roll) != kWinNumbers.end()){
+        std::cout << "WIIIN!\n";
+        money += bet;
+    }
+    else if(std::find(kLoseNumbers.begin(), kLoseNumbers.end(), roll) != kLoseNumbers.end()){
+        std::cout << "LOOOSEEE!\n";
+        money -= bet;
+    }
+    else{
+        std::cout << "That's point!\n";
+        
+    }
+
+    return money;
+}
+
+
+int main(){
+    srand(static_cast<unsigned int>(time(NULL)));
+    
+    bool is_game_on = true;
+    bool is_player_shooter;
+    int money_player = 100;
+    int money_ai = 200;
+    int betting;
+    int dice_roll;
+
+    is_player_shooter = IsShooter();
+
+    while(is_game_on)
+    {
+        if (money_player == 0 || money_ai == 0){
+            break;
+        }
+
+        if (is_player_shooter){
+            betting = 10;
+            dice_roll = DiceThrow();
+            money_player = DiceThrowResult(dice_roll, money_player, betting);
+
+            std::cout << money_player;
+        }
+        else{
+            betting = 25;
+            dice_roll = DiceThrow();
+            money_ai = DiceThrowResult(dice_roll, money_ai, betting);
+
+            std::cout << money_ai;
+        }
+
+        
+
+        // throw
+            // if 7 or 11 - win (money + bet)
+            // if 2, 3, 12 - lose (money - bet)
+            // if other number - play point
+                // point: if 7 - lose, point number - win
+        // adjust money (+/- bet)
+        // switch roles (if player true, then ai)
+        is_game_on = false;
+    }
+
     return 0;
 }
