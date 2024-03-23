@@ -56,7 +56,24 @@ static int DiceThrowResult(int roll, int money, int bet){
     }
     else{
         std::cout << "That's point!\n";
-        
+        int point_number_win = roll;
+        int point_number_lose = 7;
+        while(true){
+            roll = DiceThrow();
+            if (roll == point_number_win){
+                std::cout << "You won!";
+                money += bet;
+                break;
+            }
+            else if (roll == point_number_lose){
+                std::cout << "You lose!";
+                money -= bet;
+                break;
+            }
+            else{
+                continue;
+            }
+        }
     }
 
     return money;
