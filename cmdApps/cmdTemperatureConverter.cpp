@@ -1,6 +1,6 @@
-// Learning C++
-// Temperature Converter (between Fahrenheit, Celcius and Kelvin)
-// Game Audio Programmer (Nikita Kvitka)
+// cmd app :: Temperature Convertor
+// Between Fahrenheit, Celcius and Kelvin
+// by Nikita Kvitka as part of learningCpp (https://github.com/nikitakvitkasound/LearningCpp)
 
 #include <iostream>
 #include <iomanip>

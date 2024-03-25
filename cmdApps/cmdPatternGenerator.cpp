@@ -1,9 +1,6 @@
-/*
-    cmd app :: Pattern Generator. 
-        Dimensions of geometry figuares based on variable values NOT on actual length.
-        i.e. Square is 3x3 buy doesn't look like square even it consists of 3x3 brick grid
-    by Game Audio Programmer (Nikita Kvitka) as part of learningCpp (Github Link)
-*/
+// cmd app :: Pattern Generator
+// Dimensions of geometry figuares based on variable values NOT on actual length. i.e. Square is 3x3 buy doesn't look like square even it consists of 3x3 brick grid
+// by Nikita Kvitka as part of learningCpp (https://github.com/nikitakvitkasound/LearningCpp)
 
 #include <iostream>
 #include <vector>
