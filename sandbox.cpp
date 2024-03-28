@@ -1,17 +1,23 @@
 #include <iostream>
+#include <vector>
 
-void Test2(){
-    std::cout << "Koook";
+std::vector<int> twoSum(std::vector<int>& nums, int target) {
+    std::vector<int> answer;
+    for (std::vector<int>::size_type i = 0; i < nums.size(); ++i) {
+        for (std::vector<int>::size_type j = i + 1; j < nums.size(); ++j) {
+            if (nums[i] + nums[j] == target) {
+                answer = {static_cast<int>(i), static_cast<int>(j)};
+                return answer;
+            }
+        }
+    }
+    return answer;
 }
 
-int Test1(int a, int b){
-    Test2();
-    return a + b;
-}
-
-int main(){
-    std::cout << "hello!";
-    Test1(2, 5);
-
+int main() {
+    std::vector<int> input = {2, 7, 11, 15};
+    int sum = 9;
+    std::vector<int> pos = twoSum(input, sum);
+    std::cout << pos[0] << ", " << pos[1];
     return 0;
 }
