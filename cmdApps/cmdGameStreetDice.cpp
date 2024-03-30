@@ -1,5 +1,3 @@
-
-// TODO - Point Number Part
 // TODO - unsigned int varaibles (and is it even necessary?)
 // TODO - Cosmetics (Names Bets Money)
 // TODO - Input Validation
@@ -53,7 +51,7 @@ static bool IsShooter(){
 static bool IsDiceThrowWin(int& roll){
     bool winner;
     if (std::find(kWinNumbers.begin(), kWinNumbers.end(), roll) != kWinNumbers.end()){
-        std::cout << "Roll is " << roll << "and it's a WIN!\n";
+        std::cout << "Roll is " << roll << " and it's a WIN!\n";
         winner = true;
     }
     else if(std::find(kLoseNumbers.begin(), kLoseNumbers.end(), roll) != kLoseNumbers.end()){
@@ -104,6 +102,7 @@ int main(){
     while(is_game_on)
     {
         if (money_player == 0 || money_ai == 0){
+            std::cout << " as always Щthere is no enough money!";
             break;
         }
 
@@ -137,7 +136,7 @@ int main(){
                 money_player += betting;
             }
 
-            std::cout << "Now I have " << money_ai << "$ in my pocket! And you have " << money_player << '\n';
+            std::cout << "Now I have " << money_ai << "$ in my pocket! And you have " << money_player << "$" << '\n';
         }
 
         if (is_player_shooter){
