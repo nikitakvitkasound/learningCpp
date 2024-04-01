@@ -1,25 +1,21 @@
 #include <iostream>
-#include <vector>
 
-std::vector<int> runningSum(std::vector<int>& nums){
-    for(std::vector<int>::size_type i = 1; i < nums.size(); i++){
-        nums[i] += nums[i-1];
-    }
-    return nums;
+int modifyValue_val(int x){
+    return x + 2;
 }
-
-void printVector(std::vector<int>& v){
-    std::cout << "[";
-    for (std::vector<int>::size_type i = 0; i < v.size(); ++i){
-        std::cout << " " << v[i];
-    }
-    std::cout << " ]";
+int modifyValue_ref(int& x){
+    return x + 4;
 }
 
 int main(){
-    std::vector<int> nums = {1, 2, 3, 4};
-    std::vector<int> sum = runningSum(nums);
-    printVector(sum);
+
+    int test_value = 12;
+    std::cout << test_value << ' ';
+    
+    int a = modifyValue_val(test_value);
+    int b = modifyValue_ref(test_value);
+
+    std::cout << a << ' ' << b << ' ' << test_value;
 
     return 0;
 }
