@@ -1,21 +1,25 @@
 #include <iostream>
 
-int modifyValue_val(int x){
-    return x + 2;
-}
-int modifyValue_ref(int& x){
-    return x + 4;
-}
+class Something{
+public:
+    int x;
+    int y;
+    int pup;
+
+    void sumTwo(int xa, int ya){
+        x += xa * pup;
+        y += ya * pup;
+    }
+};
 
 int main(){
-
-    int test_value = 12;
-    std::cout << test_value << ' ';
+    Something use_class;
+    use_class.x = 3;
+    use_class.y = 3;
+    use_class.pup = 2;
     
-    int a = modifyValue_val(test_value);
-    int b = modifyValue_ref(test_value);
-
-    std::cout << a << ' ' << b << ' ' << test_value;
-
-    return 0;
+    use_class.sumTwo(2, 4);
+    std::cout << use_class.x << ' ' << use_class.y;
+    
+	return 0;
 }
