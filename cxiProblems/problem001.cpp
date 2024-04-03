@@ -6,8 +6,7 @@
 
 int main(){
     std::cout << "Hello, World!" << '\n';
-    
-    std::cout << "Press enter to exit...";
-    std::cin.get();
+
+    system("pause");
     return 0;
 }
