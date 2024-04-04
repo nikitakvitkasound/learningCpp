@@ -1,25 +1,29 @@
 #include <iostream>
 
-class Something{
+class MyClass {
 public:
-    int x;
-    int y;
-    int pup;
+    // Constructor
+    MyClass(int value) : m_value(value) {}
 
-    void sumTwo(int xa, int ya){
-        x += xa * pup;
-        y += ya * pup;
+    // Getter method
+    int getValue() const {
+        return m_value;
     }
+
+private:
+    int m_value;
 };
 
-int main(){
-    Something use_class;
-    use_class.x = 3;
-    use_class.y = 3;
-    use_class.pup = 2;
+// Function taking a const reference to MyClass object
+void printValue(const MyClass& obj) {
+    std::cout << "Value: " << obj.getValue() << std::endl;
+}
+
+int main() {
+    MyClass obj(42);
     
-    use_class.sumTwo(2, 4);
-    std::cout << use_class.x << ' ' << use_class.y;
-    
-	return 0;
+    // Pass by reference
+    printValue(obj);
+
+    return 0;
 }
