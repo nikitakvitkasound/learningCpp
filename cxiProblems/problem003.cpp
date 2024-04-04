@@ -38,6 +38,7 @@ int main(){
             break;
         default:
             std::cout << "Type 'A', 'S', 'M' or 'D' to do arithmetic operation ('Q' to quit the program)\n";
+            break;
         }
         if (keep_calculate){
             std::cout << "Let's do one more . . .  ";
