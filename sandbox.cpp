@@ -1,29 +1,16 @@
 #include <iostream>
 
-class MyClass {
-public:
-    // Constructor
-    MyClass(int value) : m_value(value) {}
-
-    // Getter method
-    int getValue() const {
-        return m_value;
-    }
-
-private:
-    int m_value;
-};
-
-// Function taking a const reference to MyClass object
-void printValue(const MyClass& obj) {
-    std::cout << "Value: " << obj.getValue() << std::endl;
-}
-
-int main() {
-    MyClass obj(42);
+int main(){
+    const int ROWS = 6;
+    const int COLUMNS = 6;
+    char test[ROWS][COLUMNS] = {{'1', '2', '3'}, {'A', 'B', 'C'}, {'3', '4', '5'}};
     
-    // Pass by reference
-    printValue(obj);
+    for (int i = 0; i < ROWS; ++i){
+        for (int j = 0; j < COLUMNS; ++j){
+            std::cout << test[i][j];
+        }
+        std::cout << '\n';
+    }
 
     return 0;
 }
