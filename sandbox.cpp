@@ -1,13 +1,26 @@
 #include <iostream>
-#include <vector>
-#include <string>
+
+int Sum(int a, int b);
+int Magic(int a, int b);
 
 int main() {
-    std::vector<int> nums = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-    for(auto iter = nums.begin(); iter != nums.end(); ++iter){
-        std::cout << "before: " << *iter << '\n';
-        (*iter)++;
-        std::cout << "after: " << *iter << '\n';
-    }
+    int x = 2;
+    int y = 4;
+    std::cout << Sum(x, y) << '\n';
+    std::cout << Magic(x, y) << '\n';
+    
+    system("pause");
     return 0;
 }
+
+/* - - - - - - - - - Declaration - - - - - - - - - */
+int Sum(int a, int b){
+    return a + b;
+}
+
+int Magic(int a, int b){
+    int c = Sum(a, b);
+    return c * 22;
+}
+
+
