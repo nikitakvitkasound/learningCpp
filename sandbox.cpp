@@ -1,26 +1,19 @@
 #include <iostream>
 
-int Sum(int a, int b);
-int Magic(int a, int b);
 
 int main() {
     int x = 2;
-    int y = 4;
-    std::cout << Sum(x, y) << '\n';
-    std::cout << Magic(x, y) << '\n';
-    
+    if (x == 2){
+        int x = 10;
+        std::cout << x << '\n';
+    }{
+        int x = 22;
+        std::cout << "hello " << x << '\n';
+    }
+    std::cout << x << '\n';
+
+
     system("pause");
     return 0;
 }
-
-/* - - - - - - - - - Declaration - - - - - - - - - */
-int Sum(int a, int b){
-    return a + b;
-}
-
-int Magic(int a, int b){
-    int c = Sum(a, b);
-    return c * 22;
-}
-
 
