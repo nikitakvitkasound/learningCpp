@@ -1,33 +1,34 @@
 #include <iostream>
+#include <vector>
 
-//bool IsTrue(bool q);
-const int MAX = 8;
-int Sum(int a = 1, int b = MAX);
-double Sum (double a, double b);
+void PrintVector(std::vector<int>& nums);
+int GetNumberFromVector(std::vector<int>& nums, size_t i);
+int& GetNumberFromVectorRef(std::vector<int>& nums, size_t i);
 
+int main(){
+    std::vector<int> numbers (10, 0);
+    size_t pos = 1;
+    int y = GetNumberFromVector(numbers, pos);
+    int& r_y = y;
+    r_y += 1;
+    pos = 2;
+    int& x = GetNumberFromVectorRef(numbers, pos);
+    x = 2;
+    PrintVector(numbers);
 
-int main() {
-    int x = 2;
-    int y = 12;
-    
-    double xx = 3.4;
-    double yy = 13.2;
-
-    std::cout << Sum() << '\n';
-    std::cout << Sum(x, y) << '\n';
-    std::cout << Sum(xx, yy) << '\n';
-
-
-    system("pause");
     return 0;
 }
 
-/* - - - - - - - Declaration - - - - - - - */
-
-int Sum(int a, int b){
-    return a + b;
+void PrintVector(std::vector<int>& nums){
+    for(std::vector<int>::iterator iter = nums.begin(); iter != nums.end(); ++iter){
+        std::cout << *iter << '\n';
+    }
 }
 
-double Sum (double a, double b){
-    return a + b;
+int GetNumberFromVector(std::vector<int>& nums, size_t i){
+    return nums[i];
+}
+
+int& GetNumberFromVectorRef(std::vector<int>& nums, size_t i){
+    return nums[i];
 }
