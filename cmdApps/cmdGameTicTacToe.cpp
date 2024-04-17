@@ -1,70 +1,77 @@
+// Create an empty Tic-Tac-Toe board 
+// Display the game instructions 
+//Determine who goes first
+// Display the board
+// While nobody has won and it's not a tie
+//     If it's the human's turn
+//         Get the human's move
+//         Update the board with the human's move
+//     Otherwise
+//         Calculate the computer's move
+//         Update the board with the computer's move
+//     Display the board
+//     Switch turns
+// Congratulate the winner or declare a tie
+
 #include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
 
-// TODO Add Game Loop
-// TODO Add AI
-// TODO Add win/lose conditions
-// TODO Add Who Goes First?
-// TODO Screen Refresh
-// TODO Made Board pretty if it's possible
+const char X = 'X';
+const char O = 'O';
+const char EMPTY = ' ';
+const char TIE = 'T';
+const char NO_ONE = 'N';
 
-static void ErrorInvalidMsg(){
-        std::cout << "[ERROR]: Invallid input!\n";
-        std::cin.clear();
-        std::cin.ignore(100000, '\n');
-}
+static void Instructions();
+static void DisplayBoard(const std::vector<char>& board);
+static void AnnounceWinner(char winner, char computer, char human);
+static char Winner(const std::vector<char>& board);
+static char HumanPiece();
+static char OpponentPiece(char piece);
+static char AskYesNo(std::string question);
+static int HumanMove(std::vector<char>& board, char human);
+static int ComputerMove(std::vector<char>& board, char computer);
+static int AskNumber(std::string question, int low = 0, int high);
+static bool IsLegal(const std::vector<char>& board, int move);
 
 
 int main(){
-    
-    long long unsigned int coord_y;
-    long long unsigned int coord_x;
-    const std::string coord_y_ref = "*ABC";
-    const std::string coord_x_ref = "*123";
+    int move;
+    const int NUM_SQUARES = 9;
+    std::vector<char> board(NUM_SQUARES, EMPTY);
 
-    const int ROWS = 4;
-    const int COLUMNS = 4;
-    const char mark = 'X';
-    char board[ROWS][COLUMNS] = {{'*', '1', '2', '3'}, 
-                                 {'A', '-', '-', '-'}, 
-                                 {'B', '-', '-', '-'}, 
-                                 {'C', '-', '-', '-'}};
+    Instructions();
+    // char human = HumanPiece();
+    // char computer = OpponentPiece(human);
+    // char turn = X;
 
-    for(int i = 0; i < ROWS; ++i){
-        for(int j = 0; j < COLUMNS; ++j){
-            std::cout << board[i][j];
-        }
-        std::cout << '\n';
-    }
-    std::cout << "\n";
-    
-    std::string input;
-    bool input_validated = false;
+    // DisplayBoard(board);
+    // while(Winner(board) == NO_ONE){
+    //     if(turn == human){
+    //         move = HumanMove(board, human);
+    //         board[move] = human;
+    //     }
+    // }
 
-    while(!(input_validated)){
-        std::cin >> input;
-        if(input.size() > 2){
-            ErrorInvalidMsg();
-            continue;
-        }
-        coord_y = coord_y_ref.find(input[0]);
-        coord_x = coord_x_ref.find(input[1]);
-        
-        if(coord_y == std::string::npos || coord_x == std::string::npos){ 
-            ErrorInvalidMsg();
-            continue;
-        }
-        input_validated = true;
-    }
-
-    board[coord_y][coord_x] = mark;
-    for(int i = 0; i < ROWS; ++i){
-        for(int j = 0; j < COLUMNS; ++j){
-            std::cout << board[i][j];
-        }
-        std::cout << '\n';
-    }
-    std::cout << "\n";
 
     system("pause");
     return 0;
+}
+
+/* - - - - - - Declaration - - - - - */
+void Instructions(){
+    std::cout << "Welcome to the ultimate man-machine showdown: Tic-Tac-Toe.\n";
+    std::cout << "--where human brain is pit against silicon processor\n\n";
+    std::cout << "<ake your move known by entering a number, 0 - 8. The number\n";
+    std::cout << "corresponds to the desired board position, as illustrated:\n\n";
+    
+    std::cout << " 0 | 1 | 2\n";
+    std::cout << " ---------\n";
+    std::cout << " 3 | 4 | 5\n";
+    std::cout << " ---------\n";
+    std::cout << " 6 | 7 | 8\n\n";
+
+    std::cout << "Prepare yourself, human. The battle is about to begin.\n\n";
 }
