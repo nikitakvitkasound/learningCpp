@@ -1,4 +1,4 @@
-// CXI Problems :: 6 :: Program to Compute Quotient and Remainder.
+// CXI Problems :: 6 :: c++ Program to Compute Quotient and Remainder.
 // Based on https://github.com/Rustam-Z/cpp-programming/blob/main/README.md list
 // by Nikita Kvitka as part of learningCpp (https://github.com/nikitakvitkasound/learningCpp)
 
