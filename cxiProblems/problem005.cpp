@@ -2,18 +2,12 @@
 // Based on https://github.com/Rustam-Z/cpp-programming/blob/main/README.md list
 // by Nikita Kvitka as part of learningCpp (https://github.com/nikitakvitkasound/learningCpp)
 
-
-//todo :: get input of user (first number and second number) validate input
-//todo :: get input of user (operation - A S M D or Q), validate input
-//todo :: do decired operation
-//todo :: if not quit ask numbers and operation again.
-
 #include <algorithm>
 #include <array>
 #include <iostream>
 #include <string>
 
-const std::array<char, 5> OPERATIONS = {'A', 'S', 'M', 'D', 'Q'};
+constexpr std::array<char, 5> OPERATIONS = {'A', 'S', 'M', 'D', 'Q'};
 
 static void Intro();
 static void ErrorMessage();
@@ -27,13 +21,33 @@ int main(){
     char user_input_op = 'A';
 
     Intro();
-    GetInputAndValidate(">>>Input Number #1: ", user_input_a);
-    GetInputAndValidate(">>>Input Number #2: ", user_input_b);
-    GetInputAndValidate(">>>Input Operation: ", user_input_op);
-    // while(operation != 'Q'){
-        
-    // }
+    do{
+        GetInputAndValidate(">>>Input Number #1: ", user_input_a);
+        GetInputAndValidate(">>>Input Number #2: ", user_input_b);
+        GetInputAndValidate(">>>Input Operation: ", user_input_op);
+        switch(user_input_op){
+            case OPERATIONS[0]:
+                std::cout << "Result of Addition: " << user_input_a + user_input_b << "\n\n";
+                break;
+            case OPERATIONS[1]:
+                std::cout << "Result of Subtraction: " << user_input_a - user_input_b << "\n\n";
+                break;
+            case OPERATIONS[2]:
+                std::cout << "Result of Multiplication: " << user_input_a * user_input_b << "\n\n";
+                break;
+            case OPERATIONS[3]:
+                std::cout << "Result of Division: " << user_input_a / user_input_b << "\n\n";
+                break;
+            case OPERATIONS[4]:
+                std::cout << "Thank you, bye!\n";
+                break;
+            default:
+                std::cout << "Something went wrong . . . \n";
+        }
 
+    } while (user_input_op != 'Q');
+
+    system("pause");
     return 0;
 }
 
@@ -43,8 +57,7 @@ int main(){
 static void Intro(){
     std::cout << "Hello there! I'm simple calculator\n";
     std::cout << "Input two decimal numbers (positive or negative)\n";
-    std::cout << "Operation: A for add, S 'subtract', M 'multiply', D 'divide' or Q 'quit'\n";
-    std::cout << "And I will do the rest!!\n";
+    std::cout << "Operation: A for add, S 'subtract', M 'multiply', D 'divide' or Q 'quit'. And I will do the rest!!\n";
 }
 
 static void ErrorMessage(){
@@ -91,6 +104,7 @@ static void GetInputAndValidate(std::string phrase, char& ch){
 
 static bool isOperationLegal(char& ch){
     ch = static_cast<char>(toupper(ch));
+    
     auto iter = std::find(OPERATIONS.begin(), OPERATIONS.end(), ch);
     if (iter != OPERATIONS.end()){
         return true;
