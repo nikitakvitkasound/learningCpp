@@ -1,6 +1,7 @@
 // CXI Problems :: 7 :: C++ Program to Calculate the Area and Circumference of a Circle.
 // Based on https://github.com/Rustam-Z/cpp-programming/blob/main/README.md list
 // by Nikita Kvitka as part of learningCpp (https://github.com/nikitakvitkasound/learningCpp)
+
 #include <iostream>
 #include <cmath>
 
@@ -24,6 +25,7 @@ int main(){
     system("pause");
     return 0;
 }
+
 
 /* - - - - - - Declaration - - - - - */
 
