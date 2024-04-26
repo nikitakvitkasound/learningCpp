@@ -10,9 +10,9 @@ double side_base = 0.0;
 double side_height = 0.0;
 double side_c = 0.0;
 
-double GetInputAndValidate(std::string phrase, double a);
-double CalculateArea(const double& a, const double& b);
-double CalculateHypotenuse(const double& a, const double& b); 
+static double GetInputAndValidate(std::string phrase, double a);
+static double CalculateArea(const double& a, const double& b);
+static double CalculateHypotenuse(const double& a, const double& b); 
 
 int main(){
     std::cout << "Hello, I can calculate the Area of Right Angle Triangle!\n";
@@ -30,7 +30,7 @@ int main(){
 
 /* - - - - - - Declaration - - - - - */
 
-double GetInputAndValidate(std::string phrase, double a){
+static double GetInputAndValidate(std::string phrase, double a){
     do {
         std::cout << phrase;
         std::cin >> a;
@@ -46,13 +46,13 @@ double GetInputAndValidate(std::string phrase, double a){
     } while(true);
 }
 
-double CalculateArea(const double& a, const double& b){
+static double CalculateArea(const double& a, const double& b){
     double area = (0.5 * a * b); //bc right triangle is half a square or a rectangle
     area = std::round(area * 100) * 0.01; //bc division cost more and multiplication
     
     return area;
 }
 
-double CalculateHypotenuse(const double& a, const double& b){
+static double CalculateHypotenuse(const double& a, const double& b){
     return std::sqrt(a * a + b * b);
 }

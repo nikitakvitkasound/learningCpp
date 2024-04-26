@@ -6,9 +6,9 @@
 #include <string>
 #include <cmath>
 
-void GetInputAndValidate(std::string phrase, double& a);
-double CalculateArea(const double& a);
-double CalculatePerimeter(const double& a);
+static void GetInputAndValidate(std::string phrase, double& a);
+static double CalculateArea(const double& a);
+static double CalculatePerimeter(const double& a);
 
 int main(){
     std::cout << "Hello, I can calculate the Area and Perimeter of a Rectangle!\n";
@@ -25,7 +25,7 @@ int main(){
 
 /* - - - - - - Declaration - - - - - */
 
-void GetInputAndValidate(std::string phrase, double& a){
+static void GetInputAndValidate(std::string phrase, double& a){
     do{
         std::cout << phrase;
         std::cin >> a;
@@ -41,10 +41,10 @@ void GetInputAndValidate(std::string phrase, double& a){
     } while(true);
 }
 
-double CalculateArea(const double& a){
+static double CalculateArea(const double& a){
     return std::round(a * a * 100) * 0.01; // round to 2 decimal point
 }
 
-double CalculatePerimeter(const double& a){
+static double CalculatePerimeter(const double& a){
     return std::round(4 * a * 100) * 0.01;
 }

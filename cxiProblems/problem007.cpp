@@ -9,9 +9,9 @@ const double PI = 3.14159265359;
 const double CIR_COEFF = 2.0;
 const double ROUND_COEFF = 100;
 
-void GetInputAndValidate(double& a);
-double GetCircleArea(const double& a);
-double GetCircleCir(const double& a);
+static void GetInputAndValidate(double& a);
+static double GetCircleArea(const double& a);
+static double GetCircleCir(const double& a);
 
 int main(){
     std::cout << "Hello, I can calculate the Area and Circumference of a Circle!\n";
@@ -29,7 +29,7 @@ int main(){
 
 /* - - - - - - Declaration - - - - - */
 
-void GetInputAndValidate(double& a){
+static void GetInputAndValidate(double& a){
     do{
         std::cout << "I need to know radius of the Circle: ";
         std::cin >> a;
@@ -45,11 +45,11 @@ void GetInputAndValidate(double& a){
     } while (true);
 }
 
-double GetCircleArea(const double& a){
+static double GetCircleArea(const double& a){
     double area = PI * a * a;
     return std::round(area * ROUND_COEFF) / ROUND_COEFF;
 }
-double GetCircleCir(const double& a){
+static double GetCircleCir(const double& a){
     double cir = PI * a * CIR_COEFF;
     return std::round(cir * ROUND_COEFF) / ROUND_COEFF;
 

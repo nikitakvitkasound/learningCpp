@@ -6,8 +6,8 @@
 #include <string>
 #include <cmath>
 
-void GetInputAndValidate(std::string phrase, double& a);
-void CalculateArea(std::string phrase, const double& a);
+static void GetInputAndValidate(std::string phrase, double& a);
+static void CalculateArea(std::string phrase, const double& a);
 
 int main(){
     double side = 0.0;
@@ -21,7 +21,7 @@ int main(){
 
 /* - - - - - - Declaration - - - - - */
 
-void GetInputAndValidate(std::string phrase, double& a){
+static void GetInputAndValidate(std::string phrase, double& a){
     do {
         std::cout << phrase;
         std::cin >> a;
@@ -37,7 +37,7 @@ void GetInputAndValidate(std::string phrase, double& a){
     } while(true);
 }
 
-void CalculateArea(std::string phrase, const double& a){
+static void CalculateArea(std::string phrase, const double& a){
     double area = (std::sqrt(3.0) / 4) * (a * a); // Area of Equilateral Triangle Using Heron's Formula (after simplify Heron's Formula)
     area = std::round(area * 100) / 100;
     

@@ -10,8 +10,8 @@ double side_a = 0.0;
 double side_b = 0.0;
 double side_c = 0.0;
 
-double GetInputAndValidate(std::string phrase, double a);
-double CalculateArea(const double& a, const double& b, const double& c);
+static double GetInputAndValidate(std::string phrase, double a);
+static double CalculateArea(const double& a, const double& b, const double& c);
 
 int main(){
     side_a = GetInputAndValidate("Enter length of side A: ", side_a);
@@ -27,7 +27,7 @@ int main(){
 
 /* - - - - - - Declaration - - - - - */
 
-double GetInputAndValidate(std::string phrase, double a){
+static double GetInputAndValidate(std::string phrase, double a){
     do {
         std::cout << phrase;
         std::cin >> a;
@@ -43,7 +43,7 @@ double GetInputAndValidate(std::string phrase, double a){
     } while(true);
 }
 
-double CalculateArea(const double& a, const double& b, const double& c){
+static double CalculateArea(const double& a, const double& b, const double& c){
     double s = (a + b + c) / 2; //Semi perimeter for Heron’s formula, 2 is just coefficient
     double area = std::sqrt(s * (s - a) * (s - b) * (s - c));
     
