@@ -1,11 +1,10 @@
-// CXI Problems :: 98 :: C++ Program to Calculate the Area of an Equilateral Triangle.
+// CXI Problems :: 9 :: C++ Program to Calculate the Area of an Equilateral Triangle.
 // Based on https://github.com/Rustam-Z/cpp-programming/blob/main/README.md list
 // by Nikita Kvitka as part of learningCpp (https://github.com/nikitakvitkasound/learningCpp)
 
 #include <iostream>
 #include <string>
 #include <cmath>
-
 
 void GetInputAndValidate(std::string phrase, double& a);
 void CalculateArea(std::string phrase, const double& a);
