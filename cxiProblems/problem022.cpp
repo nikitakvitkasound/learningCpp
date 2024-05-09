@@ -1,4 +1,4 @@
-// CXI Problems :: 21 :: BMI Calculator
+// CXI Problems :: 22 :: BMI Calculator
 // Based on https://github.com/Rustam-Z/cpp-programming/blob/main/README.md list
 // by Nikita Kvitka as part of learningCpp (https://github.com/nikitakvitkasound/learningCpp)
 // *** Problems are kind of redundant. From now on I will do simple implementation (without input validation and chacking for corner cases)
