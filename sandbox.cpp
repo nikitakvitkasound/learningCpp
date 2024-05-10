@@ -1,26 +1,13 @@
 #include <iostream>
 #include <vector>
 
-void test();
-void test(std::string str1);
-void test(std::string str1, std::string str2);
 
 int main(){
-    test();
-    test("test");
-    test("test2", "test2");
+    std::vector<int> nums{0, 1, 2, 3, 4, 5, 6};
+    //auto item = nums.begin();
+    auto nxt = std::next(nums.end(), -3);
+    //std::cout << *item << '\n';
+    std::cout << *nxt << '\n';
+
     return 0;
-}
-
-void test(){
-    std::cout << "Hello!\n";
-}
-
-void test(std::string str1){
-    std::cout << "Hello T2\n";
-    std::cout << str1 << '\n';
-}
-void test(std::string str1, std::string str2){
-    std::cout << "Hello T3\n";
-    std::cout << str1 << " " << str2 << '\n';
 }
