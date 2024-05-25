@@ -12,7 +12,6 @@ int main() {
     const wchar_t content_04[] = L"I didn't think you are coward! Are you sure you don't want to try to go there?";
     const wchar_t content_05[] = L"Run, run!! You are coward!";
     bool keep_going = true;
-
     
     while(keep_going){
         int msgbox_01 = MessageBoxW(NULL, content_01, title, MB_ICONQUESTION | MB_YESNO | MB_DEFBUTTON2);
