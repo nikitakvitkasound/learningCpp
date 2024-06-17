@@ -16,7 +16,7 @@ int main(){
     }
 
 
-    std::cout << "\n";
-    system("pause");
+    // std::cout << "\n";
+    // system("pause");
     return 0;
 }

@@ -25,13 +25,13 @@ int main(){
     } while(true);
 
     if(user_num % 2 == 0){
-        std::cout << ">>> '" << user_num << "' is Even number!\n\n";
+        std::cout << ">>> '" << user_num << "' is Even number!\n";
     }
     else{
-        std::cout << ">>> '" << user_num << "' is Odd number!\n\n";
+        std::cout << ">>> '" << user_num << "' is Odd number!\n";
     }
 
 
-    system("pause");
+    // system("pause");
     return 0;
 }
