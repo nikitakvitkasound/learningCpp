@@ -3,13 +3,6 @@
 // by Nikita Kvitka as part of learningCpp (https://github.com/nikitakvitkasound/learningCpp)
 // *** Problems are kind of redundant. From now on I will do simple implementation (without input validation and checking for corner cases until 'new' problem occurs).
 
-// get number (N) until 7
-// calc n!
-// go through n! = n * (n - 1) ....
-// do 1 / n! 
-// and store result in var
-// repeat
-
 #include <iostream>
 
 int main(){
@@ -29,5 +22,8 @@ int main(){
     }
     
     std::cout << ">>> " << sum;
+    
+    
+    system("pause");
     return 0;
 }
