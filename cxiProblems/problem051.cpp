@@ -12,9 +12,8 @@ int main(){
     
     std::cout << "Input any integer and I will tell you how many digit it has: ";
     std::cin >> number;
-    number = std::abs(number);
     
-    std::string number_of_digits = std::to_string(number); 
+    std::string number_of_digits = std::to_string(std::abs(number)); 
     std::cout << "Number of digits is " << number_of_digits.size() << "\n\n";
 
     system("pause");
