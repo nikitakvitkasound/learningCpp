@@ -1,13 +1,16 @@
 #include <iostream>
 #include <vector>
 
+bool test(bool a, bool b, bool c){
+    return a && b && !c;
+}
 
 int main(){
-    std::vector<int> nums{0, 1, 2, 3, 4, 5, 6};
-    //auto item = nums.begin();
-    auto nxt = std::next(nums.end(), -3);
-    //std::cout << *item << '\n';
-    std::cout << *nxt << '\n';
-
+    if(test(true, true, true)){
+        std::cout << "Hello!";
+    }
+    else{
+        std::cout << "bye";
+    }
     return 0;
 }
