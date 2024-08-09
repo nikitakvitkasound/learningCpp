@@ -1,16 +1,20 @@
 #include <iostream>
 
-// assume int is 4 bytes
-void doSomething(unsigned int x)
-{
-    // Run some code x times
-
-    std::cout << "x is " << x << '\n';
+bool isAllowedToTakeFunRide(){
+    std::cout << "How tall are you? (cm)\n";
+    double height{};
+    std::cin >> height;
+    
+    return height >= 140.0;
 }
 
-int main()
-{
-    doSomething(1);
+int main(){
+    if (isAllowedToTakeFunRide()){
+        std::cout << "Have fun!\n";
+    }
+    else{
+        std::cout << "Sorry, you're too short.\n";
+    }
 
-    return 0;
+  return 0;
 }
