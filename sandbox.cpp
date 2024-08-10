@@ -1,20 +1,24 @@
 #include <iostream>
 
-bool isAllowedToTakeFunRide(){
-    std::cout << "How tall are you? (cm)\n";
-    double height{};
-    std::cin >> height;
-    
-    return height >= 140.0;
+bool needs_license(std::string kind){
+    return kind == "car" || kind == "truck";
+}
+
+std::string choose_vehicle(std::string option1, std::string option2) {
+    if(option1 > option2){
+        return option2 + " is clearly the better choice.";
+    }
+    else{
+        return option1 + " is clearly the better choice.";
+    }
 }
 
 int main(){
-    if (isAllowedToTakeFunRide()){
-        std::cout << "Have fun!\n";
-    }
-    else{
-        std::cout << "Sorry, you're too short.\n";
-    }
-
-  return 0;
+    std::string vehicle {"bike"};
+    std::cout << needs_license(vehicle);
+    std::string opt_1 = "Audi";
+    std::string opt_2 = "Toyota";
+    std::cout << choose_vehicle(opt_1, opt_2);
+    
+    return 0;
 }
