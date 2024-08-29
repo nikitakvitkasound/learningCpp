@@ -1,15 +1,18 @@
 #include <iostream>
-#include <string>
-#include <algorithm>
 
-void reverse_string(std::string str){
-    std::reverse(original.begin(), .end());
+int difference(int range){
+    int sum {};
+    int square {};
+
+    for(int i = 1; i <= range; ++i){
+        sum += i;
+        square += i * i;
+    }
+    return (sum * sum) - square;
 }
 
 int main(){
-    std::string original {"tobor"};
-    std::reverse(original.begin(), original.end());
-    std::cout << original;
-
+    int range {5};
+    std::cout << difference(range);
     return 0;
 }
