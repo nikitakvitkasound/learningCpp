@@ -1,49 +1,66 @@
 #include <iostream>
 #include <string>
-#include <cmath>
+#include <algorithm>
+#include <unordered_map>
 
-int convert(const std::string& str);
+std::string encode(std::string code);
 
 int main(){
-    std::string hex {"1"};
+    std::string code {"O M G"};
 
-    std::cout << convert(hex);
+    std::cout << encode(code);
     return 0;
 }
 
-// 87 is number to trancuate to
+std::string encode(std::string code){
+    code.erase(std::remove(code.begin(), code.end(), ' '), code.end());
+    std::transform(code.begin(), code.end(), code.begin(), [] (unsigned char c) { return std::tolower(c); });
 
-int convert(const std::string& str){
-    // if(str[0] != '0' || str[1] != 'x'){
-    //     return 0;
-    // }
+    std::unordered_map<char, char> cipher = {
+        {'a', 'z'},
+        {'b', 'y'},
+        {'c', 'x'},
+        {'d', 'w'},
+        {'e', 'v'},
+        {'f', 'u'},
+        {'g', 't'},
+        {'h', 's'},
+        {'i', 'r'},
+        {'j', 'q'},
+        {'k', 'p'},
+        {'l', 'o'},
+        {'m', 'n'},
+        {'n', 'm'},
+        {'o', 'l'},
+        {'p', 'k'},
+        {'q', 'j'},
+        {'r', 'i'},
+        {'s', 'h'},
+        {'t', 'g'},
+        {'u', 'f'},
+        {'v', 'e'},
+        {'w', 'd'},
+        {'x', 'c'},
+        {'y', 'b'},
+        {'z', 'a'},
+    };
 
-    // std::string str_lower { };
-    // for(char ch : str){
-    //     str_lower += static_cast<char>(std::tolower(ch));
-    // }
+    std::string encode { };
+    int ws_counter { 0 };
 
-    int dec_number {0};
-    int hex_sys {16};
-    int digit_count {0};
-    int convert_char_number {48};
-    int convert_char_letter {87};
-
-    for(size_t i = str.size(); i-- > 0;){
-        if(str[i] < '0' || str[i] > '9'){
-            if(str[i] < 'a' || str[i] > 'f'){
-                return 0;
-            }
-            else{
-                dec_number += static_cast<int>(std::pow(hex_sys, digit_count)) * (str[i] - convert_char_letter);
-                ++digit_count;
-            }
+    for (char ch : code){
+        if (ws_counter == 5){
+            encode += ' ';
+            ws_counter = 0;
+        }
+        if(cipher.count(ch)){
+            encode += cipher[ch];
+            ++ws_counter;
         }
         else{
-            dec_number += static_cast<int>(std::pow(hex_sys, digit_count)) * (str[i] - convert_char_number);
-            ++digit_count;
+            encode += ch;
+            ++ws_counter;
         }
     }
-
-    return dec_number;
+    return encode;
 }
