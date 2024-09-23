@@ -1,9 +1,51 @@
-#include <iostream>
-#include <string>
-// #include <algorithm>
-// #include <unordered_map>
+#include "atbash_cipher.h"
 
-// namespace atbash_cipher{
+namespace atbash_cipher {
+    const int LETTER_FLIP = 96 * 2 + 27;
+    
+    std::string encode(std::string code){
+        std::string encoded;
+        int ws_counter { 0 };
+        
+        for (char c : code){
+            if(isalpha(c)){
+                if(ws_counter % 5 == 0 && ws_counter != 0){
+                    encoded += ' ';
+                }
+                encoded += static_cast<char>(LETTER_FLIP - tolower(c));
+                ++ws_counter;
+            }
+            else if(isdigit(c)){
+                if(ws_counter % 5 == 0 && ws_counter != 0){
+                    encoded += ' ';
+                }
+                encoded += c;
+                ++ws_counter;
+            }
+        }
+    
+        return encoded;
+    }
+    
+    std::string decode(std::string code){
+        std::string decoded;
+        
+        for (char c : code){
+            if(isalpha(c)){
+                decoded += static_cast<char>(LETTER_FLIP - tolower(c));
+            }
+            else if(isdigit(c)){
+                decoded += c;
+            }
+        }
+    
+        return decoded;
+    }
+
+
+// ---- my original code is below; above is updated community solution ---- //
+
+// namespace atbash_cipher {
 //         const std::unordered_map<char, char> cipher = {
 //             {'a', 'z'},
 //             {'b', 'y'},
@@ -51,7 +93,7 @@
 //                 encode += cipher.at(ch);
 //                 ++ws_counter;
 //             }
-//             else if(ch != ',' && ch != '.' && ch != ' '){
+//             else{
 //                 encode += ch;
 //                 ++ws_counter;
 //             }
@@ -69,66 +111,10 @@
 //             if(cipher.count(ch)){
 //                 decode += cipher.at(ch);
 //             }
-//             else if(ch != ',' && ch != '.' && ch != ' '){
+//             else{
 //                 decode += ch;
 //             }
 //         }
 //         return decode;
 //     }
-// }
-
-std::string encode(std::string code){
-    std::string encoded;
-    int ws_counter { 0 };
-    
-    for (char c : code){
-        if(isalpha(c)){
-            if(ws_counter % 5 == 0 && ws_counter != 0){
-                encoded += ' ';
-            }
-            encoded += static_cast<char>(96 * 2 + 27 - tolower(c));
-            ++ws_counter;
-        }
-        else if(isdigit(c)){
-            if(ws_counter++ % 5 == 0 && ws_counter != 0){
-                encoded += c;
-            }
-            encoded += c;
-            ++ws_counter;
-        }
-    }
-
-    return encoded;
-}
-
-std::string decode(std::string code){
-    std::string decoded;
-    
-    for (char c : code){
-        if(isalpha(c)){
-            decoded += static_cast<char>(96 * 2 + 27 - tolower(c));
-        }
-        else if(isdigit(c)){
-            decoded += c;
-        }
-    }
-
-    return decoded;
-}
-
-int main(){
-    // std::string code {"The quick brown fox jumps over the lazy dog."};
-    std::string code {"svool ,dlio w!r'n 122"};
-    // todo check for letter
-    // update counter
-    // todo check for digit
-    // update counter
-    // return encoded
-
-    // std::cout << encode(code) << '\n';
-    std::cout << decode(code) << '\n';
-
-    std::cout << '\n';
-
-    return 0;
-}
+}  // namespace atbash_cipher
