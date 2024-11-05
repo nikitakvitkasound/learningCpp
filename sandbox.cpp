@@ -1,40 +1,31 @@
 #include <iostream>
-#include <string_view>
 
-enum AnimalType
+struct Fraction
 {
-    cat,
-    dog,
-    chicken,
+    int numerator { 0 };
+    int denominator { 1 };
 };
 
-constexpr std::string_view animalName(AnimalType type)
-{
-    switch (type)
-    {
-    case cat: return "cat";
-    case dog: return "dog";
-    case chicken: return "chicken";
-    default:  return "";
-    }
+Fraction getFractionFromUser(){
+    Fraction user_fraction{ };
+    std::cout << "Enter a value for the numerator: ";
+    std::cin >> user_fraction.numerator;
+    std::cout << "Enter a value for the denominator: ";
+    std::cin >> user_fraction.denominator;
+
+    return user_fraction;
 }
 
-constexpr int numLegs(AnimalType type)
-{
-    switch (type)
-    {
-    case cat: return 4;
-    case dog: return 4;
-    case chicken: return 2;
-    default:  return 0;
-    }
+Fraction MultiplyFractions(const Fraction& one, const Fraction& two){
+    return Fraction {(one.numerator * two.numerator), (one.denominator * two.denominator)};
 }
 
+int main(){
+    Fraction fraction_01 {getFractionFromUser()};
+    Fraction fraction_02 {getFractionFromUser()};
 
-int main()
-{
-    constexpr AnimalType animal{ cat };
-    std::cout << "A " << animalName(animal) << " has " << numLegs(animal) << " legs\n";
-
+    Fraction multiplied {MultiplyFractions(fraction_01, fraction_02)};
+    std::cout << multiplied.numerator << '/' << multiplied.denominator << '\n';
+    
     return 0;
 }
