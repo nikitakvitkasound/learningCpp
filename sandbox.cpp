@@ -17,7 +17,7 @@ Fraction getFractionFromUser(){
 }
 
 Fraction MultiplyFractions(const Fraction& one, const Fraction& two){
-    return Fraction {(one.numerator * two.numerator), (one.denominator * two.denominator)};
+    return {(one.numerator * two.numerator), (one.denominator * two.denominator)};
 }
 
 int main(){
