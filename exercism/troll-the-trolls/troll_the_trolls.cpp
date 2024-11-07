@@ -1,4 +1,4 @@
-#include <iostream>
+namespace hellmath {
     enum class AccountStatus{
         troll,
         guest,
@@ -47,28 +47,12 @@
             return false;
         }
         if(player_01 == AccountStatus::troll || player_02 == AccountStatus:: troll){
-            return false;
+            return player_01 == player_02;
         }
         return true;
     }
 
     bool has_priority(AccountStatus rank_status_01, AccountStatus rank_status_02){
         return rank_status_01 > rank_status_02;
-    }
-
-int main(){
-
-    AccountStatus poster = AccountStatus::mod;
-    AccountStatus foster = AccountStatus::troll;
-    // Action action = Action::read;
-
-    std::cout << std::boolalpha;
-    // std::cout << valid_player_combination(AccountStatus::user, AccountStatus::guest) << '\n';
-    std::cout << has_priority(AccountStatus::user, AccountStatus::troll) << '\n';
-    if(poster == foster){
-        std::cout << "Hi!";
-    }
-
-
-    return 0;
+    }   
 }
