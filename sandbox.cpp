@@ -2,18 +2,20 @@
 #include <vector>
 #include <algorithm>
 
+
 std::vector<int> applyToEach(const std::vector<int>& numbers, const auto& lambda_function){
-    std::vector<int> applied_numbers = numbers;
-    std::for_each(applied_numbers.begin(), applied_numbers.end(), lambda_function);
+    std::vector<int> applied_numbers;
+    std::transform(numbers.begin(), numbers.end(), std::back_inserter(applied_numbers), lambda_function);
     return applied_numbers;
 }
 
 int main(){
-    constexpr int factor = 4;
-    auto lf = [factor](int& i){ i *= factor;};
+
+    constexpr int factor = 3;
+    constexpr auto scale_by_factor = [factor](int i){ return i *= factor;};
     
     std::vector<int> nums { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
-    std::vector<int> new_nums = applyToEach(nums, lf);
+    std::vector<int> new_nums = applyToEach(nums, scale_by_factor);
     
     for (int item : nums){
         std::cout << item << ' ';
