@@ -20,11 +20,11 @@ int main(){
     //     std::cout << item << ' ';
     // }
 
-    // std::iota(nums.begin(), nums.end(), 42);
-    // nums.erase(std::remove(nums.begin(), nums.end(), 47), nums.end());
-    // for(int item : nums){
-    //     std::cout << item << ' ';
-    // }
+    std::iota(nums.begin(), nums.end(), 42);
+    nums.erase(std::remove(nums.begin(), nums.end(), 47), nums.end());
+    for(int item : nums){
+        std::cout << item << ' ';
+    }
     std::vector<int> even { };
     std::vector<int> odd { };
     std::partition_copy(nums.begin(), nums.end(), std::back_inserter(even), std::back_inserter(odd), [](int i){return i % 2 == 0;});
