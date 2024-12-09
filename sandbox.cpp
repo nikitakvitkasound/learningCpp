@@ -6,8 +6,23 @@
 #include <ctime>
 // #include <utility>
 
+bool isTrue(bool a, int b){
+    if(b < 2){
+        return a;
+    }
+    return a;
+}
+
+bool isTrue(int b, bool a){
+    if(b < 2){
+        return a;
+    }
+    return a;
+}
+
+
 int main(){
-    std::vector<int> nums { 1, 6, 3, 4, 5};
-    auto itr = nums.begin();
-    std::cout << ++*itr;
+    std::cout << std::boolalpha;
+    std::cout << isTrue(true, 1) << '\n';
+    std::cout << isTrue(1, false) << '\n';
 }
