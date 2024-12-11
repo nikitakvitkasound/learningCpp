@@ -1,28 +1,23 @@
 #include <iostream>
 #include <vector>
-#include <array>
-#include <algorithm>
-#include <numeric>
-#include <ctime>
-// #include <utility>
 
-bool isTrue(bool a, int b){
-    if(b < 2){
-        return a;
-    }
-    return a;
+std::string& Test(std::vector<std::string>& words, size_t i){
+    return words[i];
 }
-
-bool isTrue(int b, bool a){
-    if(b < 2){
-        return a;
-    }
-    return a;
-}
-
 
 int main(){
-    std::cout << std::boolalpha;
-    std::cout << isTrue(true, 1) << '\n';
-    std::cout << isTrue(1, false) << '\n';
+    std::vector<std::string> greetings  { "hello", "there", ",", "Anakin", "!"};
+    for (auto item : greetings){
+        std::cout << item << ' ';
+    }
+    std::cout << '\n';
+
+    std::string& rname { Test(greetings, 3) };
+    rname = "Duku";
+
+    for (auto item : greetings){
+        std::cout << item << ' ';
+    }
+    
+    return 0;
 }
