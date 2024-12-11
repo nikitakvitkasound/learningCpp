@@ -1,23 +1,19 @@
 #include <iostream>
 #include <vector>
 
-std::string& Test(std::vector<std::string>& words, size_t i){
-    return words[i];
+std::string& badReference(std::string& phrase){
+    std::string local { "hello all!" };
+    phrase = local + phrase;
+    return phrase;
 }
 
 int main(){
-    std::vector<std::string> greetings  { "hello", "there", ",", "Anakin", "!"};
-    for (auto item : greetings){
-        std::cout << item << ' ';
-    }
-    std::cout << '\n';
+    std::string sting {"our next song is Seven Days!"};
+    std::string& test {badReference(sting)};
+    std::cout << test << '\n';
 
-    std::string& rname { Test(greetings, 3) };
-    rname = "Duku";
+    test = "help!";
+    std::cout << sting << '\n';
 
-    for (auto item : greetings){
-        std::cout << item << ' ';
-    }
-    
     return 0;
 }
