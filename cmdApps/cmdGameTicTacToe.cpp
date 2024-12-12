@@ -1,10 +1,9 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <iomanip>
+#include <ctime>
 
 
-// Determine who goes first
 // Display the board
 // While nobody has won and it's not a tie
 //     If it's the human's turn
@@ -21,21 +20,42 @@ void DisplayGreetings();
 void DisplayInstructions();
 void DisplayBoard(const std::vector<std::string>& board);
 bool isComputerFirst();
+void ComputerMove(std::vector<std::string>& board, const char& mark_computer, const std::string& empty_space, const int& board_size); // brute force AI, just fill a random empty square.
+void HumanMove(std::vector<std::string>& board, const char& mark, const std::string& empty_space);
 
 
 int main(){
+    const char MARK_FIRST { 'X' };
+    const char MARK_SECOND { 'O' };
+    char mark_computer { MARK_FIRST };
+    char mark_human { MARK_SECOND };
+        
+    const std::string EMPTY_SPACE {" "};
+    std::vector<std::string> play_board {9, EMPTY_SPACE};
+    int board_size {static_cast<int>(play_board.size())}; // for AI
+    std::srand(static_cast<unsigned int>(time(0)));       // for AI
+
     DisplayGreetings();
     DisplayInstructions();
-    std::vector<std::string> play_board { ".", ".", ".", ".", ".", ".", ".", ".", "."};
 
-    if(isComputerFirst()){
+    bool turn_computer { isComputerFirst() };
+    if(turn_computer){
         std::cout << "I have first move!\n";
+        ComputerMove(play_board, mark_computer, EMPTY_SPACE, board_size);
         DisplayBoard(play_board);
     }
     else{
         std::cout << "You have first move!\n";
+        mark_human = MARK_FIRST;
+        mark_computer = MARK_SECOND;
+        HumanMove(play_board, mark_human, EMPTY_SPACE);
         DisplayBoard(play_board);
     }
+
+    HumanMove(play_board, mark_human, EMPTY_SPACE);
+    DisplayBoard(play_board);
+
+    
 
 
     return 0;
@@ -62,18 +82,19 @@ void DisplayBoard(const std::vector<std::string>& board){
     auto position { board.begin() };
     int board_height = 3;
     int board_width = 3;
-    
+
+    std::cout << '\n';
     for(int i = 0; i < board_height; ++i){
         std::cout << "              ";   
         for(int j = 0; j < board_width; ++j){
             std::cout << *position;
             if(j != (board_width - 1)){
-                std::cout << "  :  ";
+                std::cout << " : ";
             }
             ++position;
         }
         if(i != (board_width - 1)){
-            std::cout << "\n              - - - - - - - \n";
+            std::cout << "\n              - - - - - \n";
         }
     }
     std::cout << "\n\n";
@@ -96,4 +117,26 @@ bool isComputerFirst(){
             std::cin.ignore(100000, '\n');
         }
     }while(true);
+}
+
+void ComputerMove(std::vector<std::string>& board, const char& mark, const std::string& empty_space, const int& board_size){
+    size_t check_square { };
+    while(true){
+        check_square = static_cast<size_t>(std::rand() % board_size);
+        if(board[check_square] == empty_space){
+            board[check_square] = mark;
+            break;
+        }
+        else{
+            continue;
+        }
+    }
+}
+
+void HumanMove(std::vector<std::string>& board, const char& mark, const std::string& empty_space){
+    size_t square { };
+    std::cin >> square;
+    if(board[square] == empty_space){
+        board[square] = mark;
+    }
 }
