@@ -16,6 +16,10 @@
 //     Switch turns
 // Congratulate the winner or declare a tie
 
+// TODO UX: add timer for computer move
+// TODO UX: clear board and show again every move
+// TODO UX: exit and restart
+
 void DisplayGreetings();
 void DisplayInstructions();
 void DisplayBoard(const std::vector<std::string>& board);
@@ -40,20 +44,28 @@ int main(){
 
     bool turn_computer { isComputerFirst() };
     if(turn_computer){
-        std::cout << "I have first move!\n";
-        ComputerMove(play_board, mark_computer, EMPTY_SPACE, board_size);
-        DisplayBoard(play_board);
+        std::cout << "I have first move! ";
     }
     else{
-        std::cout << "You have first move!\n";
+        std::cout << "You have first move! ";
         mark_human = MARK_FIRST;
         mark_computer = MARK_SECOND;
-        HumanMove(play_board, mark_human, EMPTY_SPACE);
-        DisplayBoard(play_board);
     }
-
-    HumanMove(play_board, mark_human, EMPTY_SPACE);
-    DisplayBoard(play_board);
+    
+    int test { 0 };
+    while(test < 9){
+        if(turn_computer){
+            ComputerMove(play_board, mark_computer, EMPTY_SPACE, board_size);
+            turn_computer = false;
+            DisplayBoard(play_board);
+        }
+        else{
+            HumanMove(play_board, mark_human, EMPTY_SPACE);
+            DisplayBoard(play_board);
+            turn_computer = true;
+        }
+        ++test;
+    }
 
     
 
@@ -102,9 +114,10 @@ void DisplayBoard(const std::vector<std::string>& board){
 
 bool isComputerFirst(){
     char answer { };
-    do{
+    while(true){
         std::cout << "Do you require the first move? (y/n): ";
         std::cin >> answer;
+        answer = static_cast<char>(tolower(answer));
         if(answer == 'y'){
             return false;
         }
@@ -116,10 +129,11 @@ bool isComputerFirst(){
             std::cin.clear();
             std::cin.ignore(100000, '\n');
         }
-    }while(true);
+    }
 }
 
 void ComputerMove(std::vector<std::string>& board, const char& mark, const std::string& empty_space, const int& board_size){
+    std::cout << "My move is: ";
     size_t check_square { };
     while(true){
         check_square = static_cast<size_t>(std::rand() % board_size);
@@ -135,8 +149,18 @@ void ComputerMove(std::vector<std::string>& board, const char& mark, const std::
 
 void HumanMove(std::vector<std::string>& board, const char& mark, const std::string& empty_space){
     size_t square { };
-    std::cin >> square;
-    if(board[square] == empty_space){
-        board[square] = mark;
+    while(true){
+        std::cout << "Your move is: ";
+        std::cin >> square;
+
+        if(board[square] == empty_space){
+            board[square] = mark;
+            return;
+        }
+        else{
+            std::cout << "[ERROR] You must input only 0 - 8, and square must be empty! Let's try again...\n";
+            std::cin.clear();
+            std::cin.ignore(100000, '\n');
+        }
     }
 }
