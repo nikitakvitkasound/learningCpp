@@ -1,19 +1,24 @@
 #include <iostream>
-#include <vector>
+// #include <vector>
+// #include <algorithm>
 
-std::string& badReference(std::string& phrase){
-    std::string local { "hello all!" };
-    phrase = local + phrase;
-    return phrase;
-}
-
+// int main(){
+//     std::vector<std::vector<int>> nums {{0, 1, 2}, {0, 4, 8}, {0, 3, 6}, {12, 12, 12}};
+//     for(const auto& row : nums){
+//         bool search_result = std::all_of(row.begin(), row.end(), [](int i){ return i == 12;});
+//         if(search_result){
+//             std::cout << "win!\n";
+//         }
+//         else{
+//             std::cout << "lost\n";
+//         }
+//     }
+//     return 0;
+// }
 int main(){
-    std::string sting {"our next song is Seven Days!"};
-    std::string& test {badReference(sting)};
-    std::cout << test << '\n';
-
-    test = "help!";
-    std::cout << sting << '\n';
-
-    return 0;
+    int test {0};
+    while(test < 9){
+        std::cout << test << '\n';
+        test++;
+    }
 }

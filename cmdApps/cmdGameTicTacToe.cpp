@@ -3,37 +3,23 @@
 #include <string>
 #include <ctime>
 
-
-// Display the board
-// While nobody has won and it's not a tie
-//     If it's the human's turn
-//         Get the human's move
-//         Update the board with the human's move
-//     Otherwise
-//         Calculate the computer's move
-//         Update the board with the computer's move
-//     Display the board
-//     Switch turns
-// Congratulate the winner or declare a tie
-
-// TODO UX: add timer for computer move
-// TODO UX: clear board and show again every move
-// TODO UX: exit and restart
-
 void DisplayGreetings();
 void DisplayInstructions();
 void DisplayBoard(const std::vector<std::string>& board);
 bool isComputerFirst();
-void ComputerMove(std::vector<std::string>& board, const char& mark_computer, const std::string& empty_space, const int& board_size); // brute force AI, just fill a random empty square.
-void HumanMove(std::vector<std::string>& board, const char& mark, const std::string& empty_space);
+void ComputerMove(std::vector<std::string>& board, const std::string& mark_computer, const std::string& empty_space, const int& board_size); // brute force AI, just fill a random empty square.
+void HumanMove(std::vector<std::string>& board, const std::string& mark, const std::string& empty_space);
+bool WinMove(const std::vector<std::vector<size_t>>& combinations, const std::vector<std::string>& board, const std::string& mark);
 
 
 int main(){
-    const char MARK_FIRST { 'X' };
-    const char MARK_SECOND { 'O' };
-    char mark_computer { MARK_FIRST };
-    char mark_human { MARK_SECOND };
+    const std::string MARK_FIRST { 'X' };
+    const std::string MARK_SECOND { 'O' };
+    std::string mark_computer { MARK_FIRST };
+    std::string mark_human { MARK_SECOND };
         
+    const std::vector<std::vector<size_t>> WIN_COMBINATIONS {{0, 1, 2}, {0, 4, 8}, {0, 3, 6}, {1, 4, 7}, 
+                                                             {2, 4, 6}, {2, 5, 8}, {3, 4, 5}, {6, 7, 8}};
     const std::string EMPTY_SPACE {" "};
     std::vector<std::string> play_board {9, EMPTY_SPACE};
     int board_size {static_cast<int>(play_board.size())}; // for AI
@@ -52,23 +38,38 @@ int main(){
         mark_computer = MARK_SECOND;
     }
     
-    int test { 0 };
-    while(test < 9){
+    bool win { false };
+    int moves { 0 };
+    while(true){
         if(turn_computer){
             ComputerMove(play_board, mark_computer, EMPTY_SPACE, board_size);
-            turn_computer = false;
             DisplayBoard(play_board);
+            win = WinMove(WIN_COMBINATIONS, play_board, mark_computer);
+            if(win){
+                break;
+            }
+            turn_computer = false;
         }
         else{
             HumanMove(play_board, mark_human, EMPTY_SPACE);
             DisplayBoard(play_board);
+            win = WinMove(WIN_COMBINATIONS, play_board, mark_human);
+            if(win){
+                break;
+            }
             turn_computer = true;
         }
-        ++test;
+        ++moves;
     }
-
-    
-
+    if(win && turn_computer){
+        std::cout << "I won!\n";
+    }
+    else if(win && !turn_computer){
+        std::cout << "You won!\n";
+    }
+    else{
+        std::cout << "It's a tie!";
+    }
 
     return 0;
 }
@@ -132,7 +133,7 @@ bool isComputerFirst(){
     }
 }
 
-void ComputerMove(std::vector<std::string>& board, const char& mark, const std::string& empty_space, const int& board_size){
+void ComputerMove(std::vector<std::string>& board, const std::string& mark, const std::string& empty_space, const int& board_size){
     std::cout << "My move is: ";
     size_t check_square { };
     while(true){
@@ -147,7 +148,7 @@ void ComputerMove(std::vector<std::string>& board, const char& mark, const std::
     }
 }
 
-void HumanMove(std::vector<std::string>& board, const char& mark, const std::string& empty_space){
+void HumanMove(std::vector<std::string>& board, const std::string& mark, const std::string& empty_space){
     size_t square { };
     while(true){
         std::cout << "Your move is: ";
@@ -163,4 +164,20 @@ void HumanMove(std::vector<std::string>& board, const char& mark, const std::str
             std::cin.ignore(100000, '\n');
         }
     }
+}
+
+bool WinMove(const std::vector<std::vector<size_t>>& combinations, const std::vector<std::string>& board, const std::string& mark){
+    int counter { 0 };
+    for(const auto& row : combinations){
+        for(size_t place: row){
+            if(board[place] == mark){
+                counter++;
+            };
+        }
+        if(counter == 3){
+            return true;
+        }
+        counter = 0;
+    }
+    return false;
 }
