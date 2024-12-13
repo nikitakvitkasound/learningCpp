@@ -9,7 +9,7 @@ void DisplayBoard(const std::vector<std::string>& board);
 bool isComputerFirst();
 void ComputerMove(std::vector<std::string>& board, const std::string& mark_computer, const std::string& empty_space, const int& board_size); // brute force AI, just fill a random empty square.
 void HumanMove(std::vector<std::string>& board, const std::string& mark, const std::string& empty_space);
-bool WinMove(const std::vector<std::vector<size_t>>& combinations, const std::vector<std::string>& board, const std::string& mark);
+bool WinMove(const std::vector<std::vector<size_t>>& combinations, const std::vector<std::string>& board, const std::string& empty_space);
 
 
 int main(){
@@ -18,10 +18,11 @@ int main(){
     std::string mark_computer { MARK_FIRST };
     std::string mark_human { MARK_SECOND };
         
+    const std::string EMPTY_SPACE {" "};
+    const int BOARD_SIZE { 9 };
+    std::vector<std::string> play_board {BOARD_SIZE, EMPTY_SPACE};
     const std::vector<std::vector<size_t>> WIN_COMBINATIONS {{0, 1, 2}, {0, 4, 8}, {0, 3, 6}, {1, 4, 7}, 
                                                              {2, 4, 6}, {2, 5, 8}, {3, 4, 5}, {6, 7, 8}};
-    const std::string EMPTY_SPACE {" "};
-    std::vector<std::string> play_board {9, EMPTY_SPACE};
     int board_size {static_cast<int>(play_board.size())}; // for AI
     std::srand(static_cast<unsigned int>(time(0)));       // for AI
 
@@ -40,11 +41,11 @@ int main(){
     
     bool win { false };
     int moves { 0 };
-    while(true){
+    while(moves < BOARD_SIZE){
         if(turn_computer){
             ComputerMove(play_board, mark_computer, EMPTY_SPACE, board_size);
             DisplayBoard(play_board);
-            win = WinMove(WIN_COMBINATIONS, play_board, mark_computer);
+            win = WinMove(WIN_COMBINATIONS, play_board, EMPTY_SPACE);
             if(win){
                 break;
             }
@@ -53,7 +54,7 @@ int main(){
         else{
             HumanMove(play_board, mark_human, EMPTY_SPACE);
             DisplayBoard(play_board);
-            win = WinMove(WIN_COMBINATIONS, play_board, mark_human);
+            win = WinMove(WIN_COMBINATIONS, play_board, EMPTY_SPACE);
             if(win){
                 break;
             }
@@ -93,8 +94,8 @@ void DisplayInstructions(){
 
 void DisplayBoard(const std::vector<std::string>& board){
     auto position { board.begin() };
-    int board_height = 3;
-    int board_width = 3;
+    const int board_height = 3;
+    const int board_width = 3;
 
     std::cout << '\n';
     for(int i = 0; i < board_height; ++i){
@@ -166,18 +167,13 @@ void HumanMove(std::vector<std::string>& board, const std::string& mark, const s
     }
 }
 
-bool WinMove(const std::vector<std::vector<size_t>>& combinations, const std::vector<std::string>& board, const std::string& mark){
-    int counter { 0 };
+bool WinMove(const std::vector<std::vector<size_t>>& combinations, const std::vector<std::string>& board, const std::string& empty_space){
     for(const auto& row : combinations){
-        for(size_t place: row){
-            if(board[place] == mark){
-                counter++;
-            };
+        for(size_t square : row){
+            if(board[square] != empty_space && board[square] == board[square + 1] && board[square + 1] == board[square + 2]){
+                return true;
+            }
         }
-        if(counter == 3){
-            return true;
-        }
-        counter = 0;
     }
     return false;
 }
