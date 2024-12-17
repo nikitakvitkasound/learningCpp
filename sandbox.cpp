@@ -1,21 +1,18 @@
 #include <iostream>
 #include <vector>
 
-
-std::string* GetItemFrom(std::vector<std::string>* const vector, size_t pos){
-    return &((*vector)[pos]);
+bool isNull(int* const ptr){
+    return ptr == nullptr;
 }
 
-
 int main(){
-    std::vector<std::string> names { "Jim", "Dwight", "Michael" };
-    
-    std::cout << GetItemFrom(&names, 1) << '\n';
-    
-    std::cout << *(GetItemFrom(&names, 1)) << '\n';
-    
-    *(GetItemFrom(&names, 1)) = "Pam";
-    std::cout << names[1] << '\n';
+    int a { 10 };
+    int* ptr_a { &a };
+    int* ptr { nullptr };
+
+    std::cout << std::boolalpha;
+    std::cout << isNull(ptr_a) << '\n';
+    std::cout << isNull(ptr) << '\n';
 
     return 0;
 }
