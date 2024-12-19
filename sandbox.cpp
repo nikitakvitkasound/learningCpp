@@ -1,32 +1,42 @@
 #include <iostream>
+#include <cmath>
 
-// Provide the definition for IntPair and the print() member function here
-struct IntPair
+class Foo
 {
-    int first{};
-    int second{};
-    void print(){
-        std::cout << "Pair (" << first << ", " << second << ")\n";
+private:
+    std::string_view m_name { };
+    int m_wins { };
+    int m_loss { };
+
+    double CalcualteRatio(const int& wins, const int& loss){
+        // return std::round(static_cast<double>(wins) / static_cast<double>(loss));
+        return std::round((static_cast<double>(wins) / static_cast<double>(loss)) * 100) * 0.01;
     }
-    bool isEqual(const IntPair& pair){
-        return (first == pair.first) && (second == pair.second);
+
+public:
+    Foo(std::string_view name, int wins, int lose)
+        : m_name { name }
+        , m_wins { wins }
+        , m_loss { lose }
+    {
+    }
+    void PrintWinLossRatio(){
+        std::cout << m_name << ": " << m_wins << " wins, " << m_loss << " loss(es) or " << CalcualteRatio(m_wins, m_loss) << " WLR.\n";
+    }
+    void SetWins(int win){
+        m_wins += win;
+    }
+    void SetLosses(int loss){
+        m_loss += loss;
     }
 };
 
 
-int main()
-{
-	IntPair p1 {1, 2};
-	IntPair p2 {3, 4};
+int main(){
+    Foo fighter {"Jackson Sackson", 18, 7};
+    // fighter.PrintWinLossRatio();
+    // fighter.SetLosses(2);
+    // fighter.SetWins(3);
+    fighter.PrintWinLossRatio();
 
-	std::cout << "p1: ";
-	p1.print();
-
-	std::cout << "p2: ";
-	p2.print();
-
-	std::cout << "p1 and p1 " << (p1.isEqual(p1) ? "are equal\n" : "are not equal\n");
-	std::cout << "p1 and p2 " << (p1.isEqual(p2) ? "are equal\n" : "are not equal\n");
-
-	return 0;
 }
