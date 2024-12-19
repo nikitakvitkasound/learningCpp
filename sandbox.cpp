@@ -8,11 +8,6 @@ private:
     int m_wins { };
     int m_loss { };
 
-    double CalcualteRatio(const int& wins, const int& loss){
-        // return std::round(static_cast<double>(wins) / static_cast<double>(loss));
-        return std::round((static_cast<double>(wins) / static_cast<double>(loss)) * 100) * 0.01;
-    }
-
 public:
     Foo(std::string_view name, int wins, int lose)
         : m_name { name }
@@ -20,8 +15,10 @@ public:
         , m_loss { lose }
     {
     }
-    void PrintWinLossRatio(){
-        std::cout << m_name << ": " << m_wins << " wins, " << m_loss << " loss(es) or " << CalcualteRatio(m_wins, m_loss) << " WLR.\n";
+    void PrintWinLossRatio() const{
+        double ratio { static_cast<double>(m_wins) / static_cast<double>(m_loss) };
+        ratio = std::round(ratio * 100) * 0.01;
+        std::cout << m_name << ": " << m_wins << " wins, " << m_loss << " loss(es) or " << ratio << " WLR.\n";
     }
     void SetWins(int win){
         m_wins += win;
@@ -33,10 +30,13 @@ public:
 
 
 int main(){
-    Foo fighter {"Jackson Sackson", 18, 7};
-    // fighter.PrintWinLossRatio();
-    // fighter.SetLosses(2);
-    // fighter.SetWins(3);
-    fighter.PrintWinLossRatio();
+    Foo fighter_01 {"Jackson Sackson", 18, 7};
+    fighter_01.SetLosses(2);
+    fighter_01.SetWins(3);
+    fighter_01.PrintWinLossRatio();
+    
+    const Foo fighter_02 {"Mike Pyke", 29, 5};
+    // fighter_02.SetLosses(2);
+    fighter_02.PrintWinLossRatio();
 
 }
