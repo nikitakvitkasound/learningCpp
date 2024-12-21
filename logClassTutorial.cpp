@@ -1,46 +1,26 @@
 #include <iostream>
-
+#include <vector>
 class Log{
-public:
-    const int LogLevelError = 0;
-    const int LogLevelWarning = 1;
-    const int LogLevelInfo = 2;
 private:
-    int m_LogLevel = LogLevelInfo;
-
+    static inline int s_total { 0 };
+    int m_a{};
+    int m_b{};
 public:
-    void SetLevel(int level){
-        m_LogLevel = level;
+    Log(int a = 4, int b = 2)
+        : m_a {a}
+        , m_b {b}
+    {    
+        ++s_total;  
     }
-
-    void Error(const char* message){
-        if(m_LogLevel >= LogLevelError){
-            std::cout << "[ERROR]: " << message << std::endl;
-        }
+    void static GetTotalInstances(){
+        std::cout << "This is static: " << s_total << '\n';
     }
-
-    void Warn(const char* message){
-        if(m_LogLevel >= LogLevelWarning){
-            std::cout << "[WARNING]: " << message << std::endl;
-        }
-    }
-    
-    void Info(const char* message){
-        if(m_LogLevel >= LogLevelInfo){
-            std::cout << "[INFO]: " << message << std::endl;
-        }
-    }
-
 };
 
+
 int main(){
-
-    Log log;
-    log.SetLevel(log.LogLevelWarning);
-    log.Warn("Hello");
-    log.Error("Hello");
-    log.Info("Hello");
-
-    //std::cin.get();
-    return 0;
+    Log test_01;
+    Log test_02;
+    std::vector<Log> logger (8);
+    Log::GetTotalInstances();
 }
