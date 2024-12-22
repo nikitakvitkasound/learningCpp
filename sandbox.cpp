@@ -1,73 +1,48 @@
 #include <iostream>
 #include <string>
-#include <vector>
+#include <algorithm>
 
-// do class Farm (vector of Critters (names)):
-    // initialize with reserved()
-    // Add() to add new member of the vector
-    // Roll() print vectors
-class Critter
+class Tekken
 {
-    friend std::string Peek(const Critter& critter){
-        return critter.m_name;
+    friend void Peek_01(const Tekken& chr){
+        std::cout << "Psss.. my name is " << chr.m_name << "!\n";
     }
-    friend std::ostream& operator<<(std::ostream& os, const Critter& critter){
-        os << critter.m_name;
+    friend void Peek_02(const Tekken& chr);
+    friend void Peek_03(const Tekken& chr);
+    friend std::ostream& operator<<(std::ostream& os, const Tekken& chr){
+        os << "C'mon, man! it's not funny I'm " << chr.m_name << "...\n";
         return os;
     }
 private:
-    std::string m_name;
+    std::string m_name {};
 public:
-    Critter(const std::string& name = "I don't know my name:(")
-        : m_name { name }
+    Tekken(const std::string& name = "Mokujin")
+        : m_name {name}
     {
     }
-    std::string GetName() const{
-        return m_name;
+    void GetName(){
+        std::cout << "My name is " << m_name << "!\n";
     }
 };
 
-// check pushback() without const and without farm size
-
-class Farm
-{
-private:
-    std::vector<Critter> m_critters;
-    // size_t m_size;
-public:
-    Farm(size_t farm_size = 0) // const std::string& name = "Ali G"
-        : m_critters { farm_size } // name
-    {
-    }
-    void Add(const Critter& critter_newcomer){
-        m_critters.push_back(critter_newcomer);
-    }
-    void Roll(){
-        for(Critter& critter_on_farm : m_critters){
-            std::cout << critter_on_farm.GetName() << " on the farm!\n";
-        }
-    }
-    size_t Size(){
-        return m_critters.size();
-    }
-};
-
-
+void Peek_02(const Tekken& chr){
+    std::cout << "Can you hear me?! My name is " << chr.m_name << "!\n";
+}
+void Peek_03(const Tekken& chr);
 
 int main(){
-    Critter critter_01;
-    Critter critter_02 {"Gadget"};
-    // std::cout << critter_01.GetName() << '\n';
-    // std::cout << critter_02.GetName() << '\n';
-    Farm farm;
-    std::cout << "Farm size is " << farm.Size() << '\n';
-    farm.Add(critter_01);
-    farm.Add(critter_02);
-    std::cout << farm.Size() << '\n';
-    std::cout << Peek(critter_01) << '\n';
-    farm.Roll();
-
-    std::cout << critter_02;
+    Tekken chr;
+    chr.GetName();
+    Peek_01(chr);
+    Peek_02(chr);
+    Peek_03(chr);
+    std::cout << chr;
 
     return 0;
+}
+
+void Peek_03(const Tekken& chr){
+    std::string upper {chr.m_name};
+    std::transform(upper.begin(), upper.end(), upper.begin(), [](unsigned char c){ return std::toupper(c);});
+    std::cout << "ARE YOU DEAF?! I AM " << upper << "!!\n";
 }
