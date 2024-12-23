@@ -1,48 +1,32 @@
 #include <iostream>
-#include <string>
-#include <algorithm>
 
-class Tekken
+class Rectangle
 {
-    friend void Peek_01(const Tekken& chr){
-        std::cout << "Psss.. my name is " << chr.m_name << "!\n";
-    }
-    friend void Peek_02(const Tekken& chr);
-    friend void Peek_03(const Tekken& chr);
-    friend std::ostream& operator<<(std::ostream& os, const Tekken& chr){
-        os << "C'mon, man! it's not funny I'm " << chr.m_name << "...\n";
-        return os;
+    friend std::istream& operator>>(std::istream& is, Rectangle& rectangle){
+        std::cout << "Define Width: ";
+        is >> rectangle.m_width;
+        std::cout << "Define Height: ";
+        is >> rectangle.m_height;
+        return is;
     }
 private:
-    std::string m_name {};
+    int m_width {};
+    int m_height {};
 public:
-    Tekken(const std::string& name = "Mokujin")
-        : m_name {name}
-    {
-    }
-    void GetName(){
-        std::cout << "My name is " << m_name << "!\n";
+    Rectangle(int width = 1, int height = 1)
+        : m_width { width }
+        , m_height { height }
+        {
+        }
+    int Area() const{
+        return m_width * m_height;
     }
 };
 
-void Peek_02(const Tekken& chr){
-    std::cout << "Can you hear me?! My name is " << chr.m_name << "!\n";
-}
-void Peek_03(const Tekken& chr);
-
 int main(){
-    Tekken chr;
-    chr.GetName();
-    Peek_01(chr);
-    Peek_02(chr);
-    Peek_03(chr);
-    std::cout << chr;
+    Rectangle a;
+    std::cin >> a;
+    std::cout << "The area is " << a.Area() << '\n';
 
     return 0;
-}
-
-void Peek_03(const Tekken& chr){
-    std::string upper {chr.m_name};
-    std::transform(upper.begin(), upper.end(), upper.begin(), [](unsigned char c){ return std::toupper(c);});
-    std::cout << "ARE YOU DEAF?! I AM " << upper << "!!\n";
 }
