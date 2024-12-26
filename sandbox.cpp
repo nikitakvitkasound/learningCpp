@@ -1,21 +1,20 @@
 #include <iostream>
+#include <map>
 
 int main(){
-    int* ptr_int_01 {new int};
-    *ptr_int_01 = 7;
-    int* ptr_int_02 { nullptr };
-    if(!ptr_int_02){
-        ptr_int_02 = new int { 22 };
-        std::cout << "memory is allocated!\n";
+    // working through video: https://youtu.be/6OoSgY6NVVk?si=nmjKUkhbTPZXE15G
+
+    std::map<std::string, int> nums;
+    nums["one"] = 1;
+    nums["two"] = 2;
+    nums["three"] = 3;
+    nums["four"] = 4;
+    nums["five"] = 5;
+    nums["six"] = 6;
+
+    for(auto& i : nums){
+        std::cout << i.first << " = " << i.second << '\n';
     }
-    std::cout << *ptr_int_01 <<' ' << *ptr_int_02 << '\n';
-
-    delete ptr_int_01;
-    ptr_int_01 = nullptr;
-    
-    delete ptr_int_02;
-    ptr_int_02 = nullptr;
-
 
     return 0;
 }
