@@ -1,20 +1,35 @@
 #include <iostream>
-#include <map>
+
+class Bot{
+private:
+    std::string m_name { };
+    int m_speed { };
+public:
+    Bot(const std::string& name, const int& speed)
+        : m_name { name } //{ new std::string {name} }
+        , m_speed { speed }
+    {
+    }
+
+    // Bot(const Bot& copy_of)
+    // {
+    //     delete m_name;
+    //     m_name = new std::string {*copy_of.m_name};
+    //     m_speed = copy_of.m_speed;
+    // }
+
+    // ~Bot()
+    // {
+    //     delete m_name;
+    // }
+    // void Print() const{
+    //     std::cout << m_name << m_speed
+    // }
+};
 
 int main(){
-    // working through video: https://youtu.be/6OoSgY6NVVk?si=nmjKUkhbTPZXE15G
 
-    std::map<std::string, int> nums;
-    nums["one"] = 1;
-    nums["two"] = 2;
-    nums["three"] = 3;
-    nums["four"] = 4;
-    nums["five"] = 5;
-    nums["six"] = 6;
-
-    for(auto& i : nums){
-        std::cout << i.first << " = " << i.second << '\n';
-    }
+    Bot test {"Jack-9", 2};
 
     return 0;
 }
