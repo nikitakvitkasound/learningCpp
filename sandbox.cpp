@@ -1,43 +1,51 @@
 #include <iostream>
-
-class Bot{
+#include <string>
+class Bot
+{
 private:
-    std::string m_name { };
-    int m_speed { };
+    std::string* m_name {};
 public:
-    Bot(const std::string& name, const int& speed)
-        : m_name { name }
-        , m_speed { speed }
-    {
-    }
+    Bot(const std::string& name = "Jack")
+        : m_name { new std::string{name} }
+        {
+        }
 
-    Bot(const Bot& copy_of)
-        : m_name { copy_of.m_name + "_copy" }
-        , m_speed { copy_of.m_speed }
-    {
+    Bot(const Bot& b){
+        delete m_name;
+        m_name = new std::string{*b.m_name};
     }
     
-    Bot& operator= (const Bot& copy_of){
-        m_name = copy_of.m_name + "_copy";
-        m_speed = copy_of.m_speed;
-        return *this; 
+    Bot& operator=(const Bot& b){
+        if (this != &b){
+            delete m_name;
+            m_name = new std::string{*b.m_name};
+        }
+        return *this;
     }
 
-    std::string GetName() const
-    {
-        return m_name;
+    ~Bot(){
+        // std::cout << "destroy!\n";
+        delete m_name;
+    }
+
+    void PrintName(){
+        std::cout << *m_name << '\n';
+    }
+    void PrintNameAddress(){
+        std::cout << m_name << '\n';
     }
 };
 
 int main(){
+    Bot robot_01 { "Jack-9" };
+    // Bot robot_02 { robot_01 };
+    Bot robot { "Jack-8" };
+    robot = robot_01;
+    robot_01.PrintNameAddress();
+    robot.PrintNameAddress();
+    // robot_02.PrintNameAddress();
+    robot_01.PrintName();
+    robot.PrintName();
+    // robot_02.PrintName();
 
-    Bot test {"Jack-9", 2};
-    Bot test_02 { test };
-    std::cout << test_02.GetName() << '\n';
-    Bot test_03 { "Steve", 5};
-    test_02 = test_03;
-    std::cout << test_02.GetName();
-
-
-    return 0;
 }
