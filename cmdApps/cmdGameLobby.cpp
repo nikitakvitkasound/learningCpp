@@ -1,3 +1,5 @@
+// update classes - working with memory and pointers...
+
 #include <iostream>
 #include <string>
 #include <list>
@@ -6,21 +8,41 @@ class Player
 {
     friend std::ostream& operator<<(std::ostream& os, const Player& p)
     {
-        os << p.m_name;
+        os << *p.m_name;
         return os;
     }
 
 private:
-    std::string m_name {};
+    std::string* m_name {};
 public:
     Player(const std::string& name = "Jon Doe")
-        : m_name { name }
+        : m_name { new std::string { name } }
     {
     }
 
+    Player(const Player& p){
+        delete m_name;
+        m_name = new std::string {*p.m_name};
+    }
+
+    Player& operator=(const Player& p){
+        if(this != &p){
+            delete m_name;
+            m_name = new std::string {*p.m_name};
+        }
+        return *this;
+    }
+
+    ~Player()
+    {
+        std::cout << "Object is destroyed!\n";
+        delete m_name;
+    }
+    
+
     std::string GetName() const
     {
-        return m_name;
+        return *m_name;
     }
 };
 
@@ -60,7 +82,7 @@ public:
         else{
             std::cout << "\nIn the Lobby: \n";
             for(auto& i : lobby){
-                std::cout << " - " << i << '\n';
+                std::cout << " - " << i << " and memory place: " << &i << '\n';
             }
         }
     }
@@ -114,7 +136,7 @@ int main(){
     }while(choice != 0);
 
     
-    system("pause");
+    // system("pause");
     return 0;
 }
 
