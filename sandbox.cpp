@@ -1,63 +1,58 @@
-    #include <iostream>
-    // #include <string>
-    // class Bot
-    // {
-    // private:
-    //     std::string* m_name {};
-    // public:
-    //     Bot(const std::string& name = "Jack")
-    //         : m_name { new std::string{name} }
-    //         {
-    //         }
+#include <iostream>
+#include <string>
 
-    //     Bot(const Bot& b){
-    //         delete m_name;
-    //         m_name = new std::string{*b.m_name};
-    //     }
-        
-    //     Bot& operator=(const Bot& b){
-    //         if (this != &b){
-    //             delete m_name;
-    //             m_name = new std::string{*b.m_name};
-    //         }
-    //         return *this;
-    //     }
+class Person
+{
+public:
+    std::string m_name {};
+    int m_age {};
 
-    //     ~Bot(){
-    //         // std::cout << "destroy!\n";
-    //         delete m_name;
-    //     }
+    Person(const std::string& name = "", int age = 0)
+        : m_name { name }
+        , m_age { age }
+    {
+    }
 
-    //     void PrintName(){
-    //         std::cout << *m_name << '\n';
-    //     }
-    //     void PrintNameAddress(){
-    //         std::cout << m_name << '\n';
-    //     }
-    // };
+    const std::string& GetName() const
+    {
+        return m_name;
+    }
 
-    // int main(){
-    //     Bot robot_01 { "Jack-9" };
-    //     // Bot robot_02 { robot_01 };
-    //     Bot robot { "Jack-8" };
-    //     robot = robot_01;
-    //     robot_01.PrintNameAddress();
-    //     robot.PrintNameAddress();
-    //     // robot_02.PrintNameAddress();
-    //     robot_01.PrintName();
-    //     robot.PrintName();
-    //     // robot_02.PrintName();
+    int GetAge() const 
+    {
+        return m_age;
+    }
+};
 
-    // }
-int* GetAddress(int* ptr){
-    return ptr;
-}
+class BaseballPlayer : public Person
+{
+public:
+    double m_ba {};
+    int m_hr {};
+
+    BaseballPlayer(double batting_average = 0.0, int home_runs = 0)
+        : m_ba { batting_average }
+        , m_hr { home_runs }
+    {
+    }
+};
+
+class Pitcher : public BaseballPlayer
+{
+public:
+    double m_war {};
+    
+    Pitcher(double war = 0.0)
+        : m_war { war }
+    {
+    }
+};
+
 
 int main(){
-    int a { 2 };
-    std::cout << a << '\n';
-    int* ptr { &a };
-    std::cout << *ptr << " " << ptr << '\n';
+    Pitcher p_01 { 0.24 };
+    p_01.m_name = "Chapman";
+    std::cout << p_01.GetName();
 
-    std::cout << GetAddress(ptr);
+    return 0;
 }
