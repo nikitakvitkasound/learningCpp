@@ -13,6 +13,11 @@ public:
     {
     }
 
+    ~Person()
+    {
+        std::cout << m_name << " is destroed!\n";
+    }
+
     const std::string& GetName() const
     {
         return m_name;
@@ -41,6 +46,11 @@ class Pitcher : public BaseballPlayer
 {
 public:
     double m_war {};
+
+    ~Pitcher()
+    {
+        std::cout << "Check! \n";
+    }
     
     Pitcher(double war = 0.0)
         : m_war { war }
@@ -50,9 +60,11 @@ public:
 
 
 int main(){
+    Person p {"Bob", 12};
     Pitcher p_01 { 0.24 };
+    std::cout << p_01.m_age << '\n';
     p_01.m_name = "Chapman";
-    std::cout << p_01.GetName();
+    std::cout << p_01.GetName() << '\n';
 
     return 0;
 }
