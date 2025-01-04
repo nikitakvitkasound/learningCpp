@@ -1,46 +1,20 @@
 #include <iostream>
 #include <string>
 
-class Person
-{
-public:
-    std::string m_name {};
-    int m_age {};
+// class Person
 
-    Person(const std::string& name = "", int age = 0)
-        : m_name { name }
-        , m_age { age }
-    {
-    }
+// class BaseballPlayer : public Person
+// {
+// public:
+//     double m_ba {};
+//     int m_hr {};
 
-    ~Person()
-    {
-        std::cout << m_name << " is destroed!\n";
-    }
-
-    const std::string& GetName() const
-    {
-        return m_name;
-    }
-
-    int GetAge() const 
-    {
-        return m_age;
-    }
-};
-
-class BaseballPlayer : public Person
-{
-public:
-    double m_ba {};
-    int m_hr {};
-
-    BaseballPlayer(double batting_average = 0.0, int home_runs = 0)
-        : m_ba { batting_average }
-        , m_hr { home_runs }
-    {
-    }
-};
+//     BaseballPlayer(double batting_average = 0.0, int home_runs = 0)
+//         : m_ba { batting_average }
+//         , m_hr { home_runs }
+//     {
+//     }
+// };
 
 class Pitcher : public BaseballPlayer
 {
