@@ -1,39 +1,82 @@
 #include <iostream>
+#include <string>
+#include <array>
+#include <algorithm>
 
-class Base
+class Animal
 {
-public:
-    int m_value {};
-    Base(int value = 0)
-        : m_value { value }
+protected:
+    std::string m_name {};
+
+    Animal(const std::string& name)
+        : m_name { name }
     {
     }
-    // virtual ~Base() = default;
 
-    /*virtual*/ std::string_view GetName() const { return "Base"; }
-    /*virtual*/ int GetValue() const { return m_value; }
+    // Animal(const Animal&) = delete;
+    // Animal& operator=(const Animal&) = delete;
+    virtual ~Animal() = default;
+
+public:
+    std::string_view GetName() const { return m_name; }
+    virtual std::string_view GetVoice() const { return "???"; } 
 };
 
-class Derived : public Base
+class Cat : public Animal
 {
 public:
-    Derived(int value = 0)
-        : Base { value }
+    Cat(const std::string& name)
+        : Animal { name }
     {
     }
 
-    std::string_view GetName() const { return "Derived"; }
-    int GetValue() const { return m_value * 2; }
+    std::string_view GetName() const { return m_name; }
+    virtual std::string_view GetVoice() const { return "meow.."; }
+};
+
+class Dog : public Animal
+{
+public:
+    Dog(const std::string& name)
+        : Animal { name }
+    {
+    }
+
+    std::string_view GetName() const { return m_name; }
+    virtual std::string_view GetVoice() const { return "woof.."; }
+};
+
+class Mouse : public Animal
+{
+public:
+    Mouse(const std::string& name)
+        : Animal { name }
+    {
+    }
+
+    std::string_view GetName() const { return m_name; }
+    virtual std::string_view GetVoice() const { return "pipip.."; }
 };
 
 int main(){
-    Derived derived { 12 };
-    Base& ref_derived { derived };
-    Base* ptr_derived { &derived };
+    Cat tom { "Tom" };
+    Cat poky { "Poky" };
+    Cat gadget { "Gadget" };
 
-    std::cout << "This is " << derived.GetName() << " and it has value of " << derived.GetValue() << '\n';
-    std::cout << "This is " << ref_derived.GetName() << " and it has value of " << ref_derived.GetValue() << '\n';
-    std::cout << "This is " << ptr_derived->GetName() << " and it has value of " << ptr_derived->GetValue() << '\n';
+    Dog burb { "Burd" };
+    Dog rex { "Rex" };
+    Dog jack { "Jack" };
+
+    Mouse jerry { "Jerry" };
+    Mouse flip { "Flip" };
+    Mouse jingles { "Jingles" };
+
+    std::array<const Animal*, 9> animals {&tom, &poky, &gadget, &burb, &rex, &jack, &jerry, &flip, &jingles};
+
+    std::cout << "we have many animals here! there are: \n";
+    for (const auto& i : animals){
+        std::cout << i->GetName() << " says " << i->GetVoice() << '\n';
+    }
 
     return 0;
 }
