@@ -3,44 +3,37 @@
 class Base
 {
 public:
-    int m_test {};
-
-    Base(int test = 0)
-        : m_test { test }
+    int m_value {};
+    Base(int value = 0)
+        : m_value { value }
     {
-        std::cout << "Base is created. Value is " << m_test << '\n';
     }
+    // virtual ~Base() = default;
 
-    virtual ~Base() = default;
-
-    void virtual GetTest() const
-    {
-        std::cout << m_test << " is test number of Base class.\n";
-    }
+    /*virtual*/ std::string_view GetName() const { return "Base"; }
+    /*virtual*/ int GetValue() const { return m_value; }
 };
 
 class Derived : public Base
 {
 public:
-    Derived (int test = 0)
-        : Base { test }
+    Derived(int value = 0)
+        : Base { value }
     {
     }
 
-    void virtual GetTest() const
-    {
-        std::cout << m_test << " is test number of Derived class.\n";
-        std::cout << "And . . . ";
-        Base::GetTest();
-    }
-
+    std::string_view GetName() const { return "Derived"; }
+    int GetValue() const { return m_value * 2; }
 };
 
-
 int main(){
-    std::cout << "Hello, World!\n";
-    Derived test { 12 };
+    Derived derived { 12 };
+    Base& ref_derived { derived };
+    Base* ptr_derived { &derived };
 
-    test.GetTest();
+    std::cout << "This is " << derived.GetName() << " and it has value of " << derived.GetValue() << '\n';
+    std::cout << "This is " << ref_derived.GetName() << " and it has value of " << ref_derived.GetValue() << '\n';
+    std::cout << "This is " << ptr_derived->GetName() << " and it has value of " << ptr_derived->GetValue() << '\n';
+
     return 0;
 }
