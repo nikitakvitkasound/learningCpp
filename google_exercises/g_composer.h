@@ -16,7 +16,7 @@ struct Composer
     int year_birth {};
     int rank {};
 
-    Composer(const std::string& _name, const std::string& _name_last, const std::string& _genre, const std::string& _fact_about, int _year_birth, int& _rank)
+    Composer(const std::string& _name, const std::string& _name_last, const std::string& _genre, const std::string& _fact_about, int _year_birth, int _rank)
         : name { _name }
         , name_last { _name_last }
         , genre { _genre }
@@ -24,7 +24,6 @@ struct Composer
         , year_birth { _year_birth }
         , rank { _rank }
     {
-        std::cout << &_rank << ' ' << &rank;
         if(year_birth < COMPOSER_EARLY_YEAR){
             year_birth = COMPOSER_EARLY_YEAR;
         }

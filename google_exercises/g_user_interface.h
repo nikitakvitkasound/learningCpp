@@ -1,7 +1,44 @@
+#ifndef G_USER_INTERFACE_H_
+#define G_USER_INTERFACE_H_
+
 #include <iostream>
 #include <limits>
 
 namespace UIcmd{
+    void GetUserInput(const std::string& prompt, std::string& input){
+        std::cout << prompt;
+        std::cin >> input;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+
+    void GetUserInput(const std::string& prompt, int& input){
+        std::cout << prompt;
+        if(!(std::cin >> input)){
+            std::cin.clear();
+            std::cerr << "[ERROR]: Input only positive numbers.\n";
+        }
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+
+    Composer SetComposer(){
+        std::string name {};
+        std::string name_last {};
+        int year_birth;
+        std::string fact_about;
+        std::string genre;
+        int rank;
+        
+        GetUserInput("Enter composer's first name: ", name);
+        GetUserInput("Enter composer's last name: ", name_last);
+        GetUserInput("Enter composer's year of birth: ", year_birth);
+        GetUserInput("Enter composer's music genre: ", genre);
+        GetUserInput("Enter interesting fact about composer: ", fact_about);
+        GetUserInput("Enter rank: ", rank);
+
+        Composer comp { name, name_last, genre, fact_about, year_birth, rank};
+        return comp;
+    }
+
     void GetComposer(Composer& comp)
     {
         std::cout << "First name: " <<  comp.name << '\n';
@@ -9,12 +46,11 @@ namespace UIcmd{
         std::cout << "Year of birth: " <<  comp.year_birth << '\n';
         std::cout << "Music genre: " <<  comp.genre << '\n';
         std::cout << "Interesting fact: " << comp.fact_about << '\n';
-        std::cout << "Rank: " << comp.rank << '\n'; 
+        std::cout << "Rank: " << comp.rank << "\n\n";
     }
-
 }
 
-
+#endif
 
 
 

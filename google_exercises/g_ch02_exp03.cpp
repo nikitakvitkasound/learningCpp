@@ -6,12 +6,17 @@
 // void Test()
 
 int main(){
-    int jopa { 225 };
-    Composer test {"Nikita", "Kvitka", "Test", "Test", 1991, jopa};
-    // UIcmd::GetComposer(test);
-    std::cout << ' ' << &jopa << '\n';
+    Database composers;
+
+    // for(int i = 0; i < 2; ++i){
+    //     composers.AddComposer();
+    // }
+
+    // composers.DisplayAll();
+
+    composers.AddComposer();
+    composers.DisplayAll();
     
-    UIcmd::GetComposer(test);
 
 
     std::cout << '\n';
