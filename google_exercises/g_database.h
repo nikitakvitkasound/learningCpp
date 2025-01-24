@@ -5,15 +5,6 @@
 #include "g_composer.h"
 #include "g_user_interface.h"
 
-// add AddComposer ++ 
-// add GetComposerLast ++ 
-// add EditComposer
-// add List Last composer ++
-// add List Composer by ID ++
-// add List by name ++
-// add List all ++
-// add List by rank ++
-
 class Database
 {
 private:
@@ -23,12 +14,19 @@ public:
         composers.push_back(UIcmd::SetComposer());
     }
 
-    void EditComposer(){
-        composers.erase(composers.end() - 1);
-    }
-
-    void DisplayLastAdded(){
-        UIcmd::GetComposer(composers.back());
+    void EditComposerByID(){
+        int id { UIcmd::GetNumber("Edit by ID? Enter the ID: ") };
+        if(id == 0){
+            id = 1;
+        }
+        --id;
+        auto tmp = composers.begin() + id;
+        tmp->name = UIcmd::GetString("Enter new first name: ");
+        tmp->name_last = UIcmd::GetString("Enter new last name: ");
+        tmp->year_birth = UIcmd::GetNumber("Enter new year of birth: ");
+        tmp->genre = UIcmd::GetString("Enter new genre: ");
+        tmp->fact_about = UIcmd::GetString("Enter new fact: ");
+        tmp->rank = UIcmd::GetNumber("Enter new rank: ");
     }
 
     void DisplayByID(){
@@ -36,7 +34,6 @@ public:
         if(id == 0){
             id = 1;
         }
-
         UIcmd::GetComposer(composers.at(static_cast<size_t>(--id))); // 0-based vector but id starts from 1. 
     }
 

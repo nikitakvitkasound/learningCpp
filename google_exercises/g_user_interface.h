@@ -6,6 +6,19 @@
 
 namespace UIcmd{
 
+    void GetMenu(){
+        std::cout << "\tComposer Database\n";
+        std::cout << "---------------------------------------------\n";
+        std::cout << "\t1) Add a new composer\n";
+        std::cout << "\t2) Edit composer by ID\n";
+        std::cout << "\t3) List composer by ID\n";
+        std::cout << "\t4) List all composers by rank\n";
+        std::cout << "\t5) List all composers by name\n";
+        std::cout << "\t6) List all composers\n";
+        std::cout << "\t0) Quit\n";
+        std::cout << "---------------------------------------------\n\n";
+    }
+
     std::string GetString(const std::string& prompt){
         std::string input;
         std::cout << prompt;
@@ -26,7 +39,7 @@ namespace UIcmd{
     }
 
     Composer SetComposer(){
-        return {GetString("Enter composer's first name: "), GetString("Enter composer's last name: "), 
+        return {GetString("\nEnter composer's first name: "), GetString("Enter composer's last name: "), 
                 GetNumber("Enter composer's year of birth: "), GetString("Enter composer's music genre: "), 
                 GetString("Enter interesting fact about composer: "), GetNumber("Enter rank: ")};
     }

@@ -3,23 +3,44 @@
 #include "g_user_interface.h"
 #include "g_database.h"
 
-// void Test()
 
 int main(){
     Database composers;
+    int command {};
+    do{
+        UIcmd::GetMenu();
 
-    // for(int i = 0; i < 2; ++i){
-    //     composers.AddComposer();
-    // }
-
-    // composers.DisplayAll();
-
-    composers.AddComposer();
-    composers.AddComposer();
-    composers.AddComposer();
-    
-    composers.DisplayByID();
-    
+        command = UIcmd::GetNumber(">> Your command: ");
+        switch (command)
+        {
+        case 0:
+            std::cout << "See you next time!\n\n";
+            break;
+        case 1:
+            composers.AddComposer();
+            std::cout << "\n . . . Composer is added . . . \n";
+            break;
+        case 2:
+            composers.EditComposerByID();
+            std::cout << "\n . . . Composer is edited . . . \n";
+            break;
+        case 3:
+            composers.DisplayByID();
+            break;
+        case 4:
+            composers.DisplayByRank();
+            break;
+        case 5:
+            composers.DisplayByName();
+            break;
+        case 6:
+            composers.DisplayAll();
+            break;
+        default:
+            std::cerr << "\t[ERROR]: Only 1 - 6 commands of 0 to quit";
+            break;
+        }
+    }while(command != 0);
 
 
     std::cout << '\n';
