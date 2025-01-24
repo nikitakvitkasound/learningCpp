@@ -5,43 +5,36 @@
 #include <limits>
 
 namespace UIcmd{
-    void GetUserInput(const std::string& prompt, std::string& input){
+
+    std::string GetString(const std::string& prompt){
+        std::string input;
         std::cout << prompt;
         std::cin >> input;
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        return input;
     }
 
-    void GetUserInput(const std::string& prompt, int& input){
+    int GetNumber(const std::string& prompt){
+        int input;
         std::cout << prompt;
         if(!(std::cin >> input)){
             std::cin.clear();
             std::cerr << "[ERROR]: Input only positive numbers.\n";
         }
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+        return input;
     }
 
     Composer SetComposer(){
-        std::string name {};
-        std::string name_last {};
-        int year_birth;
-        std::string fact_about;
-        std::string genre;
-        int rank;
-        
-        GetUserInput("Enter composer's first name: ", name);
-        GetUserInput("Enter composer's last name: ", name_last);
-        GetUserInput("Enter composer's year of birth: ", year_birth);
-        GetUserInput("Enter composer's music genre: ", genre);
-        GetUserInput("Enter interesting fact about composer: ", fact_about);
-        GetUserInput("Enter rank: ", rank);
-
-        Composer comp { name, name_last, genre, fact_about, year_birth, rank};
-        return comp;
+        return {GetString("Enter composer's first name: "), GetString("Enter composer's last name: "), 
+                GetNumber("Enter composer's year of birth: "), GetString("Enter composer's music genre: "), 
+                GetString("Enter interesting fact about composer: "), GetNumber("Enter rank: ")};
     }
 
     void GetComposer(Composer& comp)
     {
-        std::cout << "First name: " <<  comp.name << '\n';
+        std::cout << "\nFirst name: " <<  comp.name << '\n';
         std::cout << "Last name: " <<  comp.name_last << '\n';
         std::cout << "Year of birth: " <<  comp.year_birth << '\n';
         std::cout << "Music genre: " <<  comp.genre << '\n';

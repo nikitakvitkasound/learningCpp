@@ -11,17 +11,17 @@ struct Composer
 
     std::string name {};
     std::string name_last {};
+    int year_birth {};
     std::string genre {};
     std::string fact_about {};
-    int year_birth {};
     int rank {};
 
-    Composer(const std::string& _name, const std::string& _name_last, const std::string& _genre, const std::string& _fact_about, int _year_birth, int _rank)
+    Composer(const std::string& _name, const std::string& _name_last, int _year_birth, const std::string& _genre, const std::string& _fact_about, int _rank)
         : name { _name }
         , name_last { _name_last }
+        , year_birth { _year_birth }
         , genre { _genre }
         , fact_about { _fact_about }
-        , year_birth { _year_birth }
         , rank { _rank }
     {
         if(year_birth < COMPOSER_EARLY_YEAR){
