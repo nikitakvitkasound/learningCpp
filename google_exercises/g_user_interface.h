@@ -17,12 +17,11 @@ namespace UIcmd{
     int GetNumber(const std::string& prompt){
         int input;
         std::cout << prompt;
-        if(!(std::cin >> input)){
+        if(!(std::cin >> input) || input < 0){
             std::cin.clear();
             std::cerr << "[ERROR]: Input only positive numbers.\n";
         }
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
         return input;
     }
 
@@ -32,9 +31,10 @@ namespace UIcmd{
                 GetString("Enter interesting fact about composer: "), GetNumber("Enter rank: ")};
     }
 
-    void GetComposer(Composer& comp)
+    void GetComposer(const Composer& comp)
     {
-        std::cout << "\nFirst name: " <<  comp.name << '\n';
+        std::cout << "\n## " << comp.id << " ##\n";
+        std::cout << "First name: " <<  comp.name << '\n';
         std::cout << "Last name: " <<  comp.name_last << '\n';
         std::cout << "Year of birth: " <<  comp.year_birth << '\n';
         std::cout << "Music genre: " <<  comp.genre << '\n';
@@ -44,40 +44,3 @@ namespace UIcmd{
 }
 
 #endif
-
-
-
-
-
-
-
-
-
-
-
-// namespace UIcmd{
-
-//     void PrintMenu(){
-//         std::cout << "Composer Database\n";
-//         std::cout << "---------------------------------------------\n";
-//         std::cout << "1) Add a new composer\n";
-//         std::cout << "2) Retrieve a composer's data\n";
-//         std::cout << "3) Promote/demote a composer's rank\n";
-//         std::cout << "4) List all composers\n";
-//         std::cout << "5) List all composers by rank\n";
-//         std::cout << "0) Quit\n";
-//     }
-
-
-//     void GetInput(const std::string& prompt, std::string& input){
-//         std::cout << prompt;
-//         std::getline(std::cin, input);
-//     }
-
-//     void GetInput(const std::string& prompt, int& input){
-//         std::cout << prompt;
-//         std::cin >> input;
-//         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-//     }
-
-// };

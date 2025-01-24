@@ -15,7 +15,10 @@ int main(){
     // composers.DisplayAll();
 
     composers.AddComposer();
-    composers.DisplayAll();
+    composers.AddComposer();
+    composers.AddComposer();
+    
+    composers.DisplayByID();
     
 
 
